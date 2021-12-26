@@ -1,0 +1,7 @@
+﻿  Main.cpp
+C:\Users\odess\source\repos\C++\mazeGeration\mazeGeration\MazeG.h(235,21): warning C4244: =: преобразование "time_t" в "long", возможна потеря данных
+C:\Users\odess\source\repos\C++\mazeGeration\mazeGeration\MazeG.h(274,22): warning C4101: a: неиспользованная локальная переменная
+C:\Users\odess\source\repos\C++\mazeGeration\mazeGeration\Main.cpp(28,27): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\odess\source\repos\C++\mazeGeration\mazeGeration\MazeG.h(215): warning C4715: FindPath::getCOORD: значение возвращается не при всех путях выполнения
+C:\Users\odess\source\repos\C++\mazeGeration\mazeGeration\MazeG.h(178): warning C4715: FindPath::Finder: значение возвращается не при всех путях выполнения
+  mazeGeration.vcxproj -> C:\Users\odess\source\repos\C++\mazeGeration\Debug\mazeGeration.exe

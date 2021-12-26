@@ -1,0 +1,36 @@
+﻿  Main.cpp
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(243,10): warning C4309: аргумент по умолчанию: усечение константного значения
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(253,10): warning C4309: аргумент по умолчанию: усечение константного значения
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(525,58): warning C4244: аргумент: преобразование "short" в "char", возможна потеря данных
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(541,75): warning C4244: аргумент: преобразование "short" в "char", возможна потеря данных
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(552,49): warning C4244: аргумент: преобразование "short" в "char", возможна потеря данных
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(595,21): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(759,33): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(761,124): warning C4018: >=: несоответствие типов со знаком и без знака
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(775,81): warning C4018: >=: несоответствие типов со знаком и без знака
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(788,79): warning C4018: >=: несоответствие типов со знаком и без знака
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(798,91): warning C4018: >=: несоответствие типов со знаком и без знака
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(863,21): warning C4244: =: преобразование "time_t" в "long", возможна потеря данных
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(1035,31): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(1051,67): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(1056,67): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(1062,67): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(1068,67): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(1085,70): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(1171,106): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(1312,27): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(1419,33): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(1427,33): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(1460,49): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(1528,33): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(1537,37): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(446): warning C4715: Unit::GetCoord: значение возвращается не при всех путях выполнения
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(561): warning C4715: _Pers::Action: значение возвращается не при всех путях выполнения
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(826): warning C4715: Menu::getCoordText: значение возвращается не при всех путях выполнения
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(808): warning C4715: Menu::selectMenu: значение возвращается не при всех путях выполнения
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(817): warning C4715: Menu::getText: значение возвращается не при всех путях выполнения
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(372): warning C4715: _Plant::action: значение возвращается не при всех путях выполнения
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(409): warning C4715: _Detonate::action: значение возвращается не при всех путях выполнения
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(648): warning C4715: _Enemy::Action: значение возвращается не при всех путях выполнения
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(175): warning C4715: FindPath::Finder: значение возвращается не при всех путях выполнения
+  MazeGame.vcxproj -> C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\Debug\MazeGame.exe
