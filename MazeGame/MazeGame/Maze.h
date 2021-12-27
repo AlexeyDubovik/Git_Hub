@@ -6,6 +6,7 @@
 #include <cmath>
 #include <conio.h>
 #include <mmsystem.h>
+#include <thread>
 #pragma comment (lib,   "Winmm.lib")
 HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 HANDLE hin = GetStdHandle(STD_INPUT_HANDLE);
@@ -608,10 +609,21 @@ public:
                 find = new FindPath(arr, unit);
                 if (path.empty() == false)
                     path.clear();
+               /* std::thread thr(path = find->getCOORD(u), u, ref(path));
+                thr.join();*/
                 path = find->getCOORD(u);
             }
             if (path.empty() == false)
             {
+            /*    std::thread thr(unit, path,
+                    [](COORD* unit, std::list <COORD*> path)
+                    {
+                        unit->X = path.back()->X;
+                        unit->Y = path.back()->Y;
+                        path.pop_back();
+                    }
+                );
+                thr.join();*/
                 unit->X = path.back()->X;
                 unit->Y = path.back()->Y;
                 path.pop_back();

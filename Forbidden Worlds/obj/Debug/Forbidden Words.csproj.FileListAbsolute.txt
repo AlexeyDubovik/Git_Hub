@@ -1,0 +1,13 @@
+C:\Users\odess\source\repos\Forbidden Worlds\obj\Debug\Forbidden Words.csproj.SuggestedBindingRedirects.cache
+C:\Users\odess\source\repos\Forbidden Worlds\obj\Debug\Forbidden Words.csproj.GenerateResource.cache
+C:\Users\odess\source\repos\Forbidden Worlds\obj\Debug\Forbidden Words.csproj.CoreCompileInputs.cache
+C:\Users\odess\source\repos\Forbidden Worlds\obj\Debug\Forbidden_Worlds.CreateFW.resources
+C:\Users\odess\source\repos\Forbidden Worlds\obj\Debug\Forbidden_Worlds.ForbiddenWords.resources
+C:\Users\odess\source\repos\Forbidden Worlds\obj\Debug\Forbidden_Worlds.Question.resources
+C:\Users\odess\source\repos\Forbidden Worlds\bin\Debug\Forbidden Words.exe.config
+C:\Users\odess\source\repos\Forbidden Worlds\bin\Debug\Forbidden Words.exe
+C:\Users\odess\source\repos\Forbidden Worlds\bin\Debug\Forbidden Words.pdb
+C:\Users\odess\source\repos\Forbidden Worlds\obj\Debug\Forbidden Words.csproj.AssemblyReference.cache
+C:\Users\odess\source\repos\Forbidden Worlds\obj\Debug\Forbidden_Words.Properties.Resources.resources
+C:\Users\odess\source\repos\Forbidden Worlds\obj\Debug\Forbidden Words.exe
+C:\Users\odess\source\repos\Forbidden Worlds\obj\Debug\Forbidden Words.pdb

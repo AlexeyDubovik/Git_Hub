@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\odess\\source\\repos\\Miner\\Miner\\Miner.csproj": {}
+    "C:\\Users\\odess\\Source\\Repos\\AlexeyDubovik\\GitHub\\Miner\\Miner\\Miner.csproj": {}
   },
   "projects": {
-    "C:\\Users\\odess\\source\\repos\\Miner\\Miner\\Miner.csproj": {
+    "C:\\Users\\odess\\Source\\Repos\\AlexeyDubovik\\GitHub\\Miner\\Miner\\Miner.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\odess\\source\\repos\\Miner\\Miner\\Miner.csproj",
+        "projectUniqueName": "C:\\Users\\odess\\Source\\Repos\\AlexeyDubovik\\GitHub\\Miner\\Miner\\Miner.csproj",
         "projectName": "Miner",
-        "projectPath": "C:\\Users\\odess\\source\\repos\\Miner\\Miner\\Miner.csproj",
+        "projectPath": "C:\\Users\\odess\\Source\\Repos\\AlexeyDubovik\\GitHub\\Miner\\Miner\\Miner.csproj",
         "packagesPath": "C:\\Users\\odess\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\odess\\source\\repos\\Miner\\Miner\\obj\\",
+        "outputPath": "C:\\Users\\odess\\Source\\Repos\\AlexeyDubovik\\GitHub\\Miner\\Miner\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

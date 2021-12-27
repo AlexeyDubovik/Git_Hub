@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Logs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <LogFilePath>C:\Users\odess\source\repos\Spy\bin\LOG\Logs.xml</LogFilePath>
+  <StatisticsKeyDown>
+    <string>Start: 09.04.2022 21:05:48
+'R' 'E' 'E' 'V' 'E' 'V' 'W' </string>
+    <string>Start: 09.04.2022 21:21:25
+</string>
+    <string>Start: 09.04.2022 21:23:34
+</string>
+    <string>Start: 09.04.2022 21:28:45
+</string>
+    <string>Start: 09.04.2022 21:29:11
+</string>
+    <string>Start: 09.04.2022 21:30:07
+</string>
+    <string>Start: 09.04.2022 21:30:36
+</string>
+    <string>Start: 09.04.2022 21:41:01
+</string>
+    <string>Start: 09.04.2022 21:41:06
+</string>
+  </StatisticsKeyDown>
+  <StatisticsProcesseRun>
+    <string>Start: 09.04.2022 21:05:48
+Process StartTime:09.04.2022 21:05:54 ID:15076 name:dllhost
+Process StartTime:09.04.2022 21:05:55 ID:13860 name:Forbidden Words
+Process StartTime:09.04.2022 21:05:57 ID:592 name:WerFault
+</string>
+    <string>Start: 09.04.2022 21:21:25
+</string>
+    <string>Start: 09.04.2022 21:23:34
+</string>
+    <string>Start: 09.04.2022 21:28:45
+</string>
+    <string>Start: 09.04.2022 21:29:11
+</string>
+    <string>Start: 09.04.2022 21:30:07
+</string>
+    <string>Start: 09.04.2022 21:30:36
+</string>
+    <string>Start: 09.04.2022 21:41:01
+</string>
+    <string>Start: 09.04.2022 21:41:06
+</string>
+  </StatisticsProcesseRun>
+  <ManageInputWords>
+    <string>Start: 09.04.2022 21:29:16
+</string>
+  </ManageInputWords>
+  <ManageProcesses>
+    <string>Start: 09.04.2022 21:29:16
+</string>
+  </ManageProcesses>
+</Logs>

@@ -17,6 +17,8 @@ int main()
         short direct = 5;
         game->drowGameInfo();
         game->renderEnemy();
+    /*    std::thread thr(game->renderEnemy());
+        thr.join();*/
         while (_kbhit())
         {
             direct = _getch();

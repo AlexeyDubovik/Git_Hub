@@ -1,19 +1,35 @@
 ﻿  Main.cpp
-C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(243,10): warning C4309: аргумент по умолчанию: усечение константного значения
-C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(253,10): warning C4309: аргумент по умолчанию: усечение константного значения
-C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(525,58): warning C4244: аргумент: преобразование "short" в "char", возможна потеря данных
-C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(541,75): warning C4244: аргумент: преобразование "short" в "char", возможна потеря данных
-C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(552,49): warning C4244: аргумент: преобразование "short" в "char", возможна потеря данных
-C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(595,21): warning C4244: =: преобразование "double" в "int", возможна потеря данных
-C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(863,21): warning C4244: =: преобразование "time_t" в "long", возможна потеря данных
-C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(1035,31): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(561): warning C4715: _Pers::Action: значение возвращается не при всех путях выполнения
-C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(446): warning C4715: Unit::GetCoord: значение возвращается не при всех путях выполнения
-C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(409): warning C4715: _Detonate::action: значение возвращается не при всех путях выполнения
-C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(372): warning C4715: _Plant::action: значение возвращается не при всех путях выполнения
-C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(808): warning C4715: Menu::selectMenu: значение возвращается не при всех путях выполнения
-C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(826): warning C4715: Menu::getCoordText: значение возвращается не при всех путях выполнения
-C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(817): warning C4715: Menu::getText: значение возвращается не при всех путях выполнения
-C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(648): warning C4715: _Enemy::Action: значение возвращается не при всех путях выполнения
-C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(175): warning C4715: FindPath::Finder: значение возвращается не при всех путях выполнения
-  MazeGame.vcxproj -> C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\x64\Debug\MazeGame.exe
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(244,10): warning C4309: аргумент по умолчанию: усечение константного значения
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(254,10): warning C4309: аргумент по умолчанию: усечение константного значения
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(526,58): warning C4244: аргумент: преобразование "short" в "char", возможна потеря данных
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(542,75): warning C4244: аргумент: преобразование "short" в "char", возможна потеря данных
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(553,49): warning C4244: аргумент: преобразование "short" в "char", возможна потеря данных
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(596,21): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(875,21): warning C4244: =: преобразование "time_t" в "long", возможна потеря данных
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(1047,31): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\include\thread(55,14): error C2672: "invoke": не найдена соответствующая перегруженная функция
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\include\thread(61): message : выполняется компиляция ссылки на экземпляр шаблон функции "unsigned int std::thread::_Invoke<_Tuple,0,1,2>(void *) noexcept"
+          with
+          [
+              _Tuple=_Tuple
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\include\thread(66): message : выполняется компиляция ссылки на экземпляр шаблон функции "unsigned int (__cdecl *std::thread::_Get_invoke<_Tuple,0,1,2>(std::integer_sequence<size_t,0,1,2>) noexcept)(void *)"
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\include\thread(89): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::thread::_Start<std::list<COORD *,std::allocator<COORD *>>&,COORD*&,_Ty>(_Fn,COORD *&,_Ty &&)"
+          with
+          [
+              _Ty=std::reference_wrapper<std::list<COORD *,std::allocator<COORD *>>>,
+              _Fn=std::list<COORD *,std::allocator<COORD *>> &
+          ]
+C:\Users\odess\source\repos\AlexeyDubovik\GitHub\MazeGame\MazeGame\Maze.h(612): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::thread::thread<std::list<COORD *,std::allocator<COORD *>>&,COORD*&,std::reference_wrapper<std::list<COORD *,std::allocator<COORD *>>>,0>(_Fn,COORD *&,std::reference_wrapper<std::list<COORD *,std::allocator<COORD *>>> &&)"
+          with
+          [
+              _Fn=std::list<COORD *,std::allocator<COORD *>> &
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\include\thread(51,5): error C2893: Сбой при специализации функции-шаблона "unknown-type std::invoke(_Callable &&,_Ty1 &&,_Types2 &&...) noexcept(<expr>)".
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\include\type_traits(1482): message : см. объявление "std::invoke"
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\include\thread(51,5): message : Со следующими аргументами шаблона:
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\include\thread(51,5): message : "_Callable=std::list<COORD *,std::allocator<COORD *>>"
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\include\thread(51,5): message : "_Ty1=COORD *"
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\include\thread(51,5): message : "_Types2={std::reference_wrapper<std::list<COORD *,std::allocator<COORD *>>>}"
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\include\thread(51,5): error C2780: unknown-type std::invoke(_Callable &&) noexcept(<expr>): требует аргументов: 1, имеется: 3
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\include\type_traits(1476): message : см. объявление "std::invoke"

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Option xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DirectoryPath>C:\Users\odess\source\repos\Spy\bin</DirectoryPath>
+  <LogFilePath>C:\Users\odess\source\repos\Spy\bin\LOG\Logs.xml</LogFilePath>
+  <Words>
+    <string>Dude</string>
+    <string>Fuck</string>
+    <string>Idiot</string>
+  </Words>
+  <Processes>
+    <string>Forbidden Words</string>
+  </Processes>
+</Option>
