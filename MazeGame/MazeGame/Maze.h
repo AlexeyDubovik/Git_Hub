@@ -1613,7 +1613,7 @@ public:
             COORD over = { 40, 11 };
             SetConsoleCursorPosition(h, over);
             SetConsoleTextAttribute(h, 4);
-            std::cout << "Game Over" << std::endl;
+            std::cout << "Game  Over" << std::endl;
             COORD out = { 37, 12 };
             SetConsoleCursorPosition(h, out);
             SetConsoleTextAttribute(h, 4);

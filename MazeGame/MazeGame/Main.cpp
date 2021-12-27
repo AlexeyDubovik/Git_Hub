@@ -2,7 +2,7 @@
 
 int main()
 {
-    system("mode con cols=90 lines=25");
+    system("mode con cols=90 lines=26");
     system("title Corona Maze!");
     cci.bVisible = false;
     cci.dwSize = 100;
