@@ -1,0 +1,4 @@
+C:\Users\odess\source\repos\Client\obj\Debug\net472\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\odess\source\repos\Client\obj\Debug\net472\Client.AssemblyInfoInputs.cache
+C:\Users\odess\source\repos\Client\obj\Debug\net472\Client.AssemblyInfo.cs
+C:\Users\odess\source\repos\Client\obj\Debug\net472\Client.csproj.CoreCompileInputs.cache
