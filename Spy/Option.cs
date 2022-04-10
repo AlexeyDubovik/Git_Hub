@@ -32,6 +32,7 @@ namespace Spy
                             instance = (Option)serializer.Deserialize(reader);
                         }
                     }
+                instance.DirectoryPath = GetBin(path);
                 return instance;
             }
             catch
