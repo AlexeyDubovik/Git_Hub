@@ -1,0 +1,12 @@
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Spy\bin\Release\Spy.exe.config
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Spy\bin\Release\Spy.exe
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Spy\bin\Release\Spy.pdb
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Spy\obj\Release\Spy.csproj.AssemblyReference.cache
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Spy\obj\Release\Spy.csproj.SuggestedBindingRedirects.cache
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Spy\obj\Release\Spy.LogView.resources
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Spy\obj\Release\Spy.Properties.Resources.resources
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Spy\obj\Release\Spy.Spy.resources
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Spy\obj\Release\Spy.csproj.GenerateResource.cache
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Spy\obj\Release\Spy.csproj.CoreCompileInputs.cache
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Spy\obj\Release\Spy.exe
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Spy\obj\Release\Spy.pdb

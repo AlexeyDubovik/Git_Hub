@@ -406,7 +406,8 @@ namespace Forbidden_Worlds
 
         private void ForbiddenWords_FormClosing(object sender, FormClosingEventArgs e)
         {
-            StopSearch_Click(sender, e);
+            if (TC.thread != null)
+                StopSearch_Click(sender, e);
         }
     }
 }

@@ -1,0 +1,12 @@
+-----------------------------------
+log:
+Finish time: 12.04.2022 12:31:38
+Replaces: 0
+Count of  ".txt" files: 0
+Approachless ".txt" file: 0
+-----------------------------------
+log:
+Finish time: 12.04.2022 12:34:06
+Replaces: 0
+Count of  ".txt" files: 0
+Approachless ".txt" file: 0

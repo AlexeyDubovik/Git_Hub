@@ -1,0 +1,12 @@
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Forbidden Worlds\bin\Release\Forbidden Words.exe.config
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Forbidden Worlds\bin\Release\Forbidden Words.exe
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Forbidden Worlds\bin\Release\Forbidden Words.pdb
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Forbidden Worlds\obj\Release\Forbidden Words.csproj.SuggestedBindingRedirects.cache
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Forbidden Worlds\obj\Release\Forbidden_Worlds.ForbiddenWords.resources
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Forbidden Worlds\obj\Release\Forbidden_Worlds.CreateFW.resources
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Forbidden Worlds\obj\Release\Forbidden_Words.Properties.Resources.resources
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Forbidden Worlds\obj\Release\Forbidden_Worlds.Question.resources
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Forbidden Worlds\obj\Release\Forbidden Words.csproj.GenerateResource.cache
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Forbidden Worlds\obj\Release\Forbidden Words.csproj.CoreCompileInputs.cache
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Forbidden Worlds\obj\Release\Forbidden Words.exe
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Forbidden Worlds\obj\Release\Forbidden Words.pdb

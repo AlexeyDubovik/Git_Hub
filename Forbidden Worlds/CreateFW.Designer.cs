@@ -39,6 +39,8 @@
             this.WordsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.WordsListBox.BackColor = System.Drawing.SystemColors.InfoText;
+            this.WordsListBox.ForeColor = System.Drawing.Color.Chartreuse;
             this.WordsListBox.FormattingEnabled = true;
             this.WordsListBox.ItemHeight = 16;
             this.WordsListBox.Location = new System.Drawing.Point(12, 12);
@@ -51,6 +53,8 @@
             // 
             this.WordBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.WordBox.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.WordBox.ForeColor = System.Drawing.Color.Orange;
             this.WordBox.Location = new System.Drawing.Point(12, 230);
             this.WordBox.Name = "WordBox";
             this.WordBox.Size = new System.Drawing.Size(422, 22);
