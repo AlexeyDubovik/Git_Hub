@@ -36,6 +36,9 @@
             // 
             // listBox1
             // 
+            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listBox1.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.listBox1.ForeColor = System.Drawing.Color.Chartreuse;
             this.listBox1.FormattingEnabled = true;
@@ -86,7 +89,6 @@
             // 
             // LogView
             // 
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
@@ -98,6 +100,7 @@
             this.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.MinimumSize = new System.Drawing.Size(760, 412);
             this.Name = "LogView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "LogView";
             this.ResumeLayout(false);
             this.PerformLayout();
