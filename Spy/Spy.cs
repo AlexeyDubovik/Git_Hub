@@ -107,8 +107,8 @@ namespace Spy
         private void Spy_FormClosed(object sender, FormClosedEventArgs e)
         {
             Stop_Click(sender, e);
+            log.Save(option);
             option.Save();
-            log.Save(option.LogFilePath);
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {

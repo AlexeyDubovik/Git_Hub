@@ -49,17 +49,21 @@ namespace Spy
                 return instance;
             }
         }
-        public void Save(String path)
+        public void Save(Option option)
         {
             try
             {
                 XmlSerializer serializer = new XmlSerializer(instance.GetType());
-                using (var writer = new StreamWriter(path))
+                using (var writer = new StreamWriter(option.LogFilePath))
                 { serializer.Serialize(writer, instance); }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                option.LogFilePath = option.DirectoryPath + "\\LOG\\Logs.xml";
+                XmlSerializer serializer = new XmlSerializer(instance.GetType());
+                using (var writer = new StreamWriter(option.LogFilePath))
+                { serializer.Serialize(writer, instance); }
+                MessageBox.Show(ex.Message + $"New log path {option.LogFilePath}");
             }
         }
     }
