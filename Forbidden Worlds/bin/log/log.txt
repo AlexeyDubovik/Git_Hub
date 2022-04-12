@@ -10,3 +10,9 @@ Finish time: 12.04.2022 12:34:06
 Replaces: 0
 Count of  ".txt" files: 0
 Approachless ".txt" file: 0
+-----------------------------------
+log:
+Finish time: 12.04.2022 14:52:42
+Replaces: 0
+Count of  ".txt" files: 0
+Approachless ".txt" file: 0

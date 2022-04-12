@@ -9,7 +9,7 @@ namespace Client
     {
         public event Action<string> onError;
         TcpClient tcpClient; 
-        Thread threadClient; 
+        //Thread threadClient; 
         NetworkStream stream;
         BinaryFormatter bf = new BinaryFormatter();
         public void Connect(String _ip, int port)
@@ -28,11 +28,8 @@ namespace Client
         }
         public void cmdFirstBin(String str)
         {
-            Library.Request request = new Library.Request 
-            { 
-                command = Library.Commands.Message 
-            };
-            request.data = str;
+            Library.Request request = new Library.Request { command = Library.Commands.Message };
+            request.data = (string)str;
             try
             {
                 bf.Serialize(stream, request);

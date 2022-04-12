@@ -14,7 +14,6 @@ namespace NetWorkApp
         {
             InitializeComponent();
             TC = new ThreadControl();
-            Sand = DateTime.Now.ToString();
         }
         private void PrintText(String txt)
         {
@@ -60,9 +59,9 @@ namespace NetWorkApp
             }
             else
             {
-                ClientConnect.getInstance(port).Connect(TC.cts.Token);
-                ClientConnect.getInstance(port).onError += PrintText;
-                ClientConnect.getInstance(port).onAccess += PrintText;
+                ClientConnect.getInstance().Connect(TC.cts.Token, port);
+                ClientConnect.getInstance().onError += PrintText;
+                ClientConnect.getInstance().onAccess += PrintText;
                 ClientOperation.onRun += (msg) => { PrintText(msg); };
             }
         }
@@ -70,9 +69,17 @@ namespace NetWorkApp
         {
             IsServer = param;
             if (IsServer)
+            {
+                Sand = DateTime.Now.ToString();
+                PrintText(Sand);
                 PrintText("Start by Srever...");
+            }
             else if (Sand == null)
+            {
+                Sand = DateTime.Now.ToString();
+                PrintText(Sand);
                 PrintText("Start by Client...");
+            }
             TC._manualEvent = new ManualResetEvent(true);
             TC.cts = new CancellationTokenSource();
             TC.thread = new Thread(_NetWork);
@@ -81,6 +88,7 @@ namespace NetWorkApp
         }
         private void _Stop()
         {
+            ClientConnect.getInstance().Disconnect();
             TC.cts?.Cancel();
             TC.thread = null;
             TC.cts = null;
@@ -115,7 +123,7 @@ namespace NetWorkApp
         }
         private void Server_FormClosed(object sender, FormClosedEventArgs e)
         {
-            TC.cts?.Cancel();
+            _Stop();
         }
         private void ClearText_Click(object sender, EventArgs e)
         {

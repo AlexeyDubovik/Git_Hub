@@ -14,13 +14,9 @@ namespace Server
         Thread threadClient;
         public static event Action<string> onRun;
         BinaryFormatter bf = new BinaryFormatter();
-        public ClientOperation(object client)
+        public ClientOperation(TcpClient client)
         {
-            tcpClient = new TcpClient();
-            if (client is Socket)
-                tcpClient.Client = (client as Socket);
-            else
-                tcpClient = (client as TcpClient);
+            tcpClient = client;
             threadClient = new Thread(RunBin);
             threadClient.Start();
         } 
@@ -34,7 +30,7 @@ namespace Server
                 switch (req.command)
                 {
                     case Library.Commands.Message:
-                        Answer ans = new Answer((String)req.data);
+                        Answer ans = new Answer((string)req.data);
                         ans.buildResponse(ref response);
                         break;
                     default:
