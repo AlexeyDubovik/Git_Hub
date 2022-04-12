@@ -96,9 +96,9 @@
             this.listBox1.ForeColor = System.Drawing.Color.LawnGreen;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(169, 159);
+            this.listBox1.Location = new System.Drawing.Point(174, 141);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(714, 292);
+            this.listBox1.Size = new System.Drawing.Size(691, 292);
             this.listBox1.TabIndex = 3;
             // 
             // progressBar1
@@ -106,10 +106,10 @@
             this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.progressBar1.Location = new System.Drawing.Point(169, 121);
+            this.progressBar1.Location = new System.Drawing.Point(174, 103);
             this.progressBar1.Maximum = 0;
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(714, 23);
+            this.progressBar1.Size = new System.Drawing.Size(691, 23);
             this.progressBar1.TabIndex = 4;
             // 
             // label1
@@ -118,7 +118,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MingLiU_HKSCS-ExtB", 28.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Salmon;
-            this.label1.Location = new System.Drawing.Point(281, 41);
+            this.label1.Location = new System.Drawing.Point(277, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(395, 47);
             this.label1.TabIndex = 5;
@@ -148,7 +148,7 @@
             this.groupBox1.Controls.Add(this.PauseSearch);
             this.groupBox1.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox1.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.groupBox1.Location = new System.Drawing.Point(22, 149);
+            this.groupBox1.Location = new System.Drawing.Point(27, 131);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(126, 293);
             this.groupBox1.TabIndex = 7;
@@ -165,6 +165,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.listBox1);
+            this.MinimumSize = new System.Drawing.Size(957, 544);
             this.Name = "ForbiddenWords";
             this.Text = "Forbidden Words";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ForbiddenWords_FormClosing);

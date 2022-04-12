@@ -10,3 +10,4 @@ C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Forbidden Worlds\obj\Release\F
 C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Forbidden Worlds\obj\Release\Forbidden Words.csproj.CoreCompileInputs.cache
 C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Forbidden Worlds\obj\Release\Forbidden Words.exe
 C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Forbidden Worlds\obj\Release\Forbidden Words.pdb
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Forbidden Worlds\obj\Release\Forbidden Words.csproj.AssemblyReference.cache
