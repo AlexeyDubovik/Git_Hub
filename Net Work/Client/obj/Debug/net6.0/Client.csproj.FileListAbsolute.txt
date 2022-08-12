@@ -1,0 +1,15 @@
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Net Work\Client\bin\Debug\net6.0\Client.deps.json
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Net Work\Client\bin\Debug\net6.0\Client.dll
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Net Work\Client\bin\Debug\net6.0\ref\Client.dll
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Net Work\Client\bin\Debug\net6.0\Client.pdb
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Net Work\Client\bin\Debug\net6.0\Library.dll
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Net Work\Client\bin\Debug\net6.0\Library.pdb
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Net Work\Client\obj\Debug\net6.0\Client.csproj.AssemblyReference.cache
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Net Work\Client\obj\Debug\net6.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Net Work\Client\obj\Debug\net6.0\Client.AssemblyInfoInputs.cache
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Net Work\Client\obj\Debug\net6.0\Client.AssemblyInfo.cs
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Net Work\Client\obj\Debug\net6.0\Client.csproj.CoreCompileInputs.cache
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Net Work\Client\obj\Debug\net6.0\Client.csproj.CopyComplete
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Net Work\Client\obj\Debug\net6.0\Client.dll
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Net Work\Client\obj\Debug\net6.0\ref\Client.dll
+C:\Users\odess\source\repos\AlexeyDubovik\Git_Hub\Net Work\Client\obj\Debug\net6.0\Client.pdb

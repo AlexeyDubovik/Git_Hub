@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "23aa7835-b954-4ea5-9b3d-67bf431c1430": {
+      "ProjectGuid": "23aa7835-b954-4ea5-9b3d-67bf431c1430",
+      "DisplayName": "NetWork",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Прочие файлы",
+      "ColorIndex": -1
+    },
+    "4efe9e06-6c50-4a71-8571-76831f93c6c9": {
+      "ProjectGuid": "4efe9e06-6c50-4a71-8571-76831f93c6c9",
+      "DisplayName": "Library",
+      "ColorIndex": 1
+    },
+    "7ea76a93-1c82-4bcb-8da5-348aac8b8bd4": {
+      "ProjectGuid": "7ea76a93-1c82-4bcb-8da5-348aac8b8bd4",
+      "DisplayName": "Client",
+      "ColorIndex": 2
+    },
+    "489aef95-898b-4223-bffa-df1cf772c629": {
+      "ProjectGuid": "489aef95-898b-4223-bffa-df1cf772c629",
+      "DisplayName": "Server",
+      "ColorIndex": 3
+    },
+    "8ac63d18-dba4-422b-8ade-6c409a6fb2f5": {
+      "ProjectGuid": "8ac63d18-dba4-422b-8ade-6c409a6fb2f5",
+      "DisplayName": "Net Work",
+      "ColorIndex": 4
+    },
+    "8e15cd8c-c7d1-43db-9f1d-6bfbf401a6d0": {
+      "ProjectGuid": "8e15cd8c-c7d1-43db-9f1d-6bfbf401a6d0",
+      "DisplayName": "NetWorkApp",
+      "ColorIndex": 5
+    }
+  },
+  "NextColorIndex": 6
+}

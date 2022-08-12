@@ -1,0 +1,41 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    var Locale = ViewData["Locale"] as String;
+    ViewData["Title"] = @Localizer["Title"];
+    var User = ViewData["authUser"] as Forum.DAL.Entities.User;
+}
+<div class="text-center">
+    <h1 class="display-4">@Localizer["Header"]</h1>
+    @if (User != null)
+    {
+        <p style="color:red">@User.RealName</p>
+        <p id="Interval" style="color:red">@ViewData["fromAuthMiddleware"]</p>
+    }
+    <p>@Localizer["Placeholder_Date"]: @ViewData["date"] @ViewData["time"]</p>
+    <i>@ViewBag.hash</i>
+    <p>@Localizer["Placeholder_UsersCount"]: @ViewData["Users"]</p>
+    @*@foreach(string UserRealName in ViewBag.UsersRealName)
+        {
+        <p>@UserRealName</p>
+        }*@
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+@if (User != null)
+{
+    <script>
+        const Interval = document.getElementById("Interval");
+        let id = setInterval(function(){
+            fetch("/@Locale/Home/GetInterval?")
+                .then(r=>r.text())
+                .then(t=>{
+                    Interval.innerText = t;
+            })
+            //Interval.innerText = String(Number(Interval.innerText) + 1);
+        },1000);
+    </script>
+}
+
+
+
+

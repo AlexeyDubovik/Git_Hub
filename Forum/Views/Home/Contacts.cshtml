@@ -1,0 +1,18 @@
+﻿@model Contacts
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = Localizer["Title"];
+}
+<h1 align="center">@ViewData["Title"]</h1>
+<div class="container-md" align="center" style="display:block">
+    <p>
+        @Localizer["Placeholder_Address"]: <b>@Model!.Address</b>
+    </p>
+    <p>
+        @Localizer["Placeholder_Phone"]: <b>@Model.Phone</b>
+    </p>
+    <p>
+        @Localizer["Placeholder_Name"]: <b>@Model.Name</b>
+    </p>
+</div>
