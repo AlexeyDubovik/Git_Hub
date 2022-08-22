@@ -18,7 +18,6 @@ namespace Forum.DAL.Entities
         public string Avatar { get; set; } = "default";
         public DateTime RegMoment { get; set; } = DateTime.Now;
         public DateTime? LogMoment { get; set; }
-
-
+        public List<Article>? articles { get; set; }
     }
 }

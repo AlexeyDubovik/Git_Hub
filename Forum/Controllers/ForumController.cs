@@ -42,5 +42,10 @@ namespace Forum.Controllers
         {
             return View();
         }
+        public IActionResult Topic(string id)
+        {
+            ViewData["Topic-id"] = id;
+            return View();
+        }
     }
 }

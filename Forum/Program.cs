@@ -47,7 +47,7 @@ app.UseRequestLocalization(options =>
     options.SupportedUICultures = options.SupportedCultures;
     options.SetDefaultCulture(options.SupportedCultures[2].Name);
     options.RequestCultureProviders.Insert(0, new RouteDataRequestCultureProvider());
-});
+}); 
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();

@@ -1,4 +1,4 @@
-﻿//import { validFileType } from '/js/Function.js';
+﻿import { validFileType } from '/js/Function.js';
 document.addEventListener('DOMContentLoaded', () => {
     //
     //avatar select
@@ -23,13 +23,5 @@ document.addEventListener('DOMContentLoaded', () => {
                 Error.style.display = "inline";
                 Error.textContent = 'Not a valid file type. ';
             }
-    }
-    let fileTypes = ['image/jpeg', 'image/pjpeg', 'image/png']
-    function validFileType(file) {
-        for (let i = 0; i < fileTypes.length; i++) {
-            if (file.type === fileTypes[i])
-                return true;
-        }
-        return false;
     }
 })

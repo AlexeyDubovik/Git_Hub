@@ -6,22 +6,23 @@
     var dataField = ViewData["dataField"] as String[];
     var Locale = ViewData["Locale"] as String;
 }
-<div class="AuthForm" style="flex-direction:column;">
-    <h1>
-        @Localizer["Header"]
-    </h1>
-    
-    <div style="display:block;text-align:center;">
-        <form action="/@Locale/Auth/RegUser" method="post" enctype="multipart/form-data">
-            <div id="tmp" style="display:none;">
-                <div id="Container_Avatar_Reg">
-                    <img id="Container_Avatar_BackgroundIMG" src="/Icon/blot2.png"/>
-                    <img id="AvatarIMG" src="/img/default.png"/>
-                    <br/>
+<div class="container-custom">
+    <div class="AuthForm" style="flex-direction:column;">
+        <h1>
+            @Localizer["Header"]
+        </h1>
+        
+        <div style="display:block;text-align:center;">
+            <form action="/@Locale/Auth/RegUser" method="post" enctype="multipart/form-data">
+                <div id="tmp" style="display:none;">
+                    <div id="Container_Avatar_Reg">
+                        <img id="Container_Avatar_BackgroundIMG" src="/Icon/blot2.png"/>
+                        <img id="AvatarIMG" src="/img/default.png"/>
+                        <br/>
+                    </div>
                 </div>
-            </div>
-            <div style="position:relative;">
-                <svg id="LoginSVGReg" class="svgBody" xmlns="/Icon/AuthFon.svg" viewBox="0 0 1771.000000 887.000000" preserveAspectRatio="xMidYMid meet">
+                <div style="position:relative;">
+                    <svg id="LoginSVGReg" class="svgBody" xmlns="/Icon/AuthFon.svg" viewBox="0 0 1771.000000 887.000000" preserveAspectRatio="xMidYMid meet">
                     <g transform="translate(0.000000,887.000000) scale(0.100000,-0.100000)">
                     <path d="M10899 8636 c-82 -61 -129 -115 -129 -150 0 -39 65 2 135 85 22 26
                     57 60 78 75 39 28 49 54 20 54 -10 0 -57 -29 -104 -64z"/>
@@ -468,22 +469,23 @@
                     <path d="M6984 656 c-14 -37 57 -288 91 -325 8 -7 21 -11 29 -8 15 6 15 10 0
                     44 -10 21 -28 79 -40 128 -39 152 -64 202 -80 161z"/>
                     </g>
-                </svg>
-                <input type="text" name="RealName" placeholder=@Localizer["Placeholder_Name"] value=@dataField?[0]> @if (err?[1] != null){<br/><i style="color:red;white-space:nowrap;">@err[1]</i>} <br/>
-                <input type="text" name="Login" placeholder=@Localizer["Placeholder_Log"] value=@dataField?[1]>     @if (err?[2] != null){<br/><i style="color:red;white-space:nowrap;">@err[2]</i>} <br/>
-                <input type="password" name="Password1" placeholder=@Localizer["Placeholder_Pass"] />               @if (err?[3] != null){<br/><i style="color:red;white-space:nowrap;">@err[3]</i>} <br/>
-                <input type="password" name="Password2" placeholder=@Localizer["Placeholder_ConfPass"] />           @if (err?[4] != null){<br/><i style="color:red;white-space:nowrap;">@err[4]</i>} else
-                                                                                                                     if (err?[5] != null){<br/><i style="color:red;white-space:nowrap;">@err[5]</i>} <br/>
-                <input type="email" name="Email" placeholder=@Localizer["Placeholder_Email"] value=@dataField?[2]>  @if (err?[6] != null){<br/><i style="color:red;white-space:nowrap;">@err[6]</i>} <br/>
-                <p id="avaError" style="color:red;display:none;"></p>
-                <label class="custom-file-upload">
-                    <input type="file" id="avatar_Select_Button" name="Avatar" accept=".jpg, .jpeg, .png" multiple/>
-                    @Localizer["Button_Ava"]
-                </label><br/>
-                <button class="CustomButton">@Localizer["Button_Reg"]</button> 
-            </div>
-        </form>
+                    </svg>
+                    <input type="text" name="RealName" placeholder=@Localizer["Placeholder_Name"] value=@dataField?[0]> @if (err?[1] != null){<br/><i style="color:red;white-space:nowrap;">@err[1]</i>} <br/>
+                    <input type="text" name="Login" placeholder=@Localizer["Placeholder_Log"] value=@dataField?[1]>     @if (err?[2] != null){<br/><i style="color:red;white-space:nowrap;">@err[2]</i>} <br/>
+                    <input type="password" name="Password1" placeholder=@Localizer["Placeholder_Pass"] />               @if (err?[3] != null){<br/><i style="color:red;white-space:nowrap;">@err[3]</i>} <br/>
+                    <input type="password" name="Password2" placeholder=@Localizer["Placeholder_ConfPass"] />           @if (err?[4] != null){<br/><i style="color:red;white-space:nowrap;">@err[4]</i>} else
+                                                                                                                         if (err?[5] != null){<br/><i style="color:red;white-space:nowrap;">@err[5]</i>} <br/>
+                    <input type="email" name="Email" placeholder=@Localizer["Placeholder_Email"] value=@dataField?[2]>  @if (err?[6] != null){<br/><i style="color:red;white-space:nowrap;">@err[6]</i>} <br/>
+                    <p id="avaError" style="color:red;display:none;"></p>
+                    <label class="custom-file-upload">
+                        <input type="file" id="avatar_Select_Button" name="Avatar" accept=".jpg, .jpeg, .png" multiple/>
+                        @Localizer["Button_Ava"]
+                    </label><br/>
+                    <button class="CustomButton">@Localizer["Button_Reg"]</button> 
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-<script src="/js/Registration.js"></script>
+<script type="module" src="/js/Registration.js"></script>
 

@@ -6,17 +6,18 @@
     var Inf = ViewData["Info"] as String;
     ViewData["Title"] = @User?.RealName;
 }
-<div id="ProfileConteiner" style="position:relative;padding:20px;">
-    @if (Inf != null)
-    {
-        <div class="info">
-            <b>@Inf</b>
-        </div>
-    }
-    <div class="container-md">
-        <div class="container-sm" style='display:flex;flex-direction:column;'>
-            <div style="position:relative;padding:1em 1em 1em;">
-                <svg id="AvaBackSvg" class="svgBody" xmlns="/Icon/AvatarBorder.svg" viewBox="0 0 755.000000 752.000000" style="flex-shrink: 0;" preserveAspectRatio="xMidYMid meet">
+<div class="container-custom">
+    <div id="ProfileConteiner" style="position:relative;padding:20px;">
+        @if (Inf != null)
+        {
+            <div class="info">
+                <b>@Inf</b>
+            </div>
+        }
+        <div class=".container-lg">
+            <div class="container-sm" style='display:flex;flex-direction:column;'>
+                <div style="position:relative;padding:1em 1em 1em;">
+                    <svg id="AvaBackSvg" class="svgBody" xmlns="/Icon/AvatarBorder.svg" viewBox="0 0 755.000000 752.000000" style="flex-shrink: 0;" preserveAspectRatio="xMidYMid meet">
                     <g transform="translate(0.000000,752.000000) scale(0.100000,-0.100000)">
                         <path d="M4310 7438 c-30 -62 -52 -76 -44 -26 l5 33 -14 -30 -14 -30 -16 30
                     c-9 17 -16 23 -17 15 0 -25 -35 -48 -64 -43 -15 3 -26 1 -26 -6 0 -7 -29 -11
@@ -386,60 +387,61 @@
                     21 -10 0 -35 46 42 57 94 4 22 -16 90 -25 82 -3 -3 -10 -2 -16 3 -25 19 -63
                     21 -78 3z" />
                     </g>
-                </svg>
-                <div class="container-sm" style='display:flex;flex-direction:column;'>
-                    <Name1 style="display:none">@Localizer["Button_Ava"]</Name1>
-                    <Name2 style="display:none">@Localizer["Button_ChAva"]</Name2>
-                    <img id="AvatarIMG" src="/img/@User?.Avatar" />
-                    <p id="avaError" style="color:red;display:none;"></p>
-                    <label id="ButtonAvatar" class="custom-file-upload" style='margin:auto;'>
-                        <input type="file" id="avatar_Select_Button" name="Avatar" accept="image/*" />
-                        <Text></Text>
-                    </label>
+                    </svg>
+                    <div class="container-sm" style='display:flex;flex-direction:column;'>
+                        <Name1 style="display:none">@Localizer["Button_Ava"]</Name1>
+                        <Name2 style="display:none">@Localizer["Button_ChAva"]</Name2>
+                        <img id="AvatarIMG" src="/img/@User?.Avatar" />
+                        <p id="avaError" style="color:red;display:none;"></p>
+                        <label id="ButtonAvatar" class="custom-file-upload" style='margin:auto;'>
+                            <input type="file" id="avatar_Select_Button" name="Avatar" accept="image/*" />
+                            <Text></Text>
+                        </label>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container-sm" style='display:flex;flex-direction:column;'>
-            <div style="position:relative; padding:1em 1em 1em;">
-                <div>
-                    <i>@Localizer["Placeholder_DateReg"]: </i>
-                    <i class="UserProfile" style="white-space:nowrap;">@User?.RegMoment</i>
+            <div class="container-sm" style='display:flex;flex-direction:column;'>
+                <div style="position:relative; padding:1em 1em 1em; text-align:center;">
+                    <div>
+                        <i>@Localizer["Placeholder_DateReg"]: </i>
+                        <i class="UserProfile" style="white-space:nowrap;">@User?.RegMoment</i>
+                    </div>
+                    <div>
+                        <i>@Localizer["Placeholder_Log"]: </i>
+                        <i class="UserProfile" id="Login">@User?.Login</i>
+                    </div>
+                    <div>
+                        <i>@Localizer["Placeholder_Name"]: </i>
+                        <i class="UserProfile" id="RealName">@User?.RealName</i>
+                    </div>
+                    <div>
+                        <i>@Localizer["Placeholder_Email"]: </i>
+                        <i class="UserProfile" id="Email">@User?.Email</i>
+                    </div>
+                    <div id="PassLink" style="display:flex;flex-direction:row;">
+                        <a href="#" id="PassLink_href" class="link-success">@Localizer["Link_Pass"]</a>
+                    </div>
+                    <form id="PassForm" action="/Auth/ChangeUserPassword" method="post" enctype="multipart/form-data">
+                        <input type="password" name="OldPassword"  placeholder=@Localizer["Placeholder_CurPass"] />     @if (err?[0] != null){<i style="color:red;white-space:nowrap;">@err[0]</i>} <br />
+                        <input type="password" name="NewPassword1" placeholder=@Localizer["Placeholder_NewPass"] />     @if (err?[1] != null){<i style="color:red;white-space:nowrap;">@err[1]</i>} <br />
+                        <input type="password" name="NewPassword2" placeholder=@Localizer["Placeholder_ConfPass"] />    @if (err?[2] != null){<i style="color:red;white-space:nowrap;">@err[2]</i>} <br />
+                        <button type="submit" class="CustomButton">@Localizer["Button_Change"]</button><button id="hidde" type="button" class="CustomButton">@Localizer["Button_Hidde"]</button>
+                    </form>
+                    @if (err == null)
+                    {
+                        <script>
+                            document.getElementById('PassForm').style.display = "none";
+                            document.getElementById('PassLink').style.display = "inline";
+                        </script>
+                    }
+                    else
+                    {
+                        <script>
+                            document.getElementById('PassForm').style.display = "inline";
+                            document.getElementById('PassLink').style.display = "none";
+                        </script>
+                    }
                 </div>
-                <div>
-                    <i>@Localizer["Placeholder_Log"]: </i>
-                    <i class="UserProfile" id="Login">@User?.Login</i>
-                </div>
-                <div>
-                    <i>@Localizer["Placeholder_Name"]: </i>
-                    <i class="UserProfile" id="RealName">@User?.RealName</i>
-                </div>
-                <div>
-                    <i>@Localizer["Placeholder_Email"]: </i>
-                    <i class="UserProfile" id="Email">@User?.Email</i>
-                </div>
-                <div id="PassLink" style="display:flex;flex-direction:row;">
-                    <a href="#" id="PassLink_href" class="link-success">@Localizer["Link_Pass"]</a>
-                </div>
-                <form id="PassForm" action="/Auth/ChangeUserPassword" method="post" enctype="multipart/form-data">
-                    <input type="password" name="OldPassword"  placeholder=@Localizer["Placeholder_CurPass"] />     @if (err?[0] != null){<i style="color:red;white-space:nowrap;">@err[0]</i>} <br />
-                    <input type="password" name="NewPassword1" placeholder=@Localizer["Placeholder_NewPass"] />     @if (err?[1] != null){<i style="color:red;white-space:nowrap;">@err[1]</i>} <br />
-                    <input type="password" name="NewPassword2" placeholder=@Localizer["Placeholder_ConfPass"] />    @if (err?[2] != null){<i style="color:red;white-space:nowrap;">@err[2]</i>} <br />
-                    <button type="submit" class="CustomButton">@Localizer["Button_Change"]</button><button id="hidde" type="button" class="CustomButton">@Localizer["Button_Hidde"]</button>
-                </form>
-                @if (err == null)
-                {
-                    <script>
-                        document.getElementById('PassForm').style.display = "none";
-                        document.getElementById('PassLink').style.display = "inline";
-                    </script>
-                }
-                else
-                {
-                    <script>
-                        document.getElementById('PassForm').style.display = "inline";
-                        document.getElementById('PassLink').style.display = "none";
-                    </script>
-                }
             </div>
         </div>
     </div>

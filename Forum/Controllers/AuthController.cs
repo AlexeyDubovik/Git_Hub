@@ -184,7 +184,6 @@ namespace Forum.Controllers
                 }
                 else
                     dataField[2] = UserData.Email;
-                
                 //Avatar
                 //проверка на размер аватарки
                 //

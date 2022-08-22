@@ -9,10 +9,12 @@ namespace Forum.DAL.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public Guid TopicId { get; set; }
+        public Topic? Topic { get; set; }
         public string Text { get; set; } = "default";
         public Guid AuthorId { get; set; }
+        public User? Author { get; set; }
         public Guid? ReplyId { get; set; }
+        public Article? Reply { get; set; }
         public DateTime CreatedDate { get; set; }
-        //public string PictureFile { get; set; } = "default";
     }
 }

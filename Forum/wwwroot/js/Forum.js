@@ -1,44 +1,41 @@
-﻿document.addEventListener("DOMContentLoaded", () => {
-    //const app = document.getElementById("app");
-    //if (!app) throw "Forum script: APP not found";
-    //else {
-    //const [html] = document.getElementsByTagName("html")
-    //const Locale = html.getAttribute("lang");
-
-    let tbody = document.getElementById("Forum").getElementsByTagName("tbody")[0];
-    loadTopics(tbody);
-    /*}*/
-});
-function loadTopics(tbody) {
-    fetch("/api/Topic")
-        .then(r => r.json())
-        .then(j => {
-            console.log(j.length);
-            console.log(j);
-            if (j instanceof Array) {
-                showTopics(tbody, j);
-            }
-            else {
-                throw "ShowTopics: data Invalid"
-            }
-        });
-};
-function showTopics(tbody, j) {
-    for (let topic of j) {
-        fetch(`/api/User/${topic.authorId}`)
-            .then(r => r.json())
-            .then(j => {
-                tbody.innerHTML += `<tr data-id='${topic.id}'>
-                    <th></th>
-                    <td id="topic_Field"><a href="#" id="topic_Href"><b>${topic.title}</b><br/><i>${topic.descrtiption}</i><a></td>
-                    <td> ? </td>
-                    <td id="topic_AuthorName"><a href="#" id="Author_Href">${j.realName}</a></td>
-                    <td> ? </td></tr>`;
-                document.getElementById("topic_Href").addEventListener('click',()=> updateImageDisplay(topic.title));
-            });
-        
+﻿import { GetHTML, GetTopics } from '/js/FetchRequest.js';
+document.addEventListener("DOMContentLoaded", () => {
+    const [html] = document.getElementsByTagName("html")
+    const Data = {
+        tbody: document.getElementById("Forum").getElementsByTagName("tbody")[0],
+        Locale: html.getAttribute("lang"),
+        date: "00.00.0000, 00:00"
     }
-}
-function updateImageDisplay(name) {
-    console.log(name);
+    getAll('/templates/Topic.html').then(([Topics, templateTopic]) => {
+        if (Topics instanceof Array) {
+            Data.Topics = Topics;
+            Data.templateTopic = templateTopic;
+            injectTopics(Data);
+        }
+        else {
+            throw "ShowTopics: data Invalid"
+        }
+    });
+});
+function injectTopics(Data) {
+    for (let topic of Data.Topics) {
+        if (topic.ArticlesInfo.Count > 0)
+            Data.date = new Date(topic.ArticlesInfo.CreatedDate).toLocaleString(Data.Locale);
+        let HTML = "";
+        HTML = Data.templateTopic
+            .replaceAll("{{TopicID}}", topic.Id)
+            .replaceAll("{{TopicHref}}", `/${Data.Locale}/Forum/Topic/${topic.Id}`)
+            .replaceAll("{{TopicTitle}}", topic.Title)
+            .replaceAll("{{TopicDescrtiption}}", topic.Descrtiption)
+            .replaceAll("{{ArticleCount}}", topic.ArticlesInfo.Count)
+            .replaceAll("{{AuthorHref}}", 'none')
+            .replaceAll("{{RealName}}", topic.Author.RealName)
+            .replaceAll("{{LastArtDate}}", Data.date)
+            .replaceAll("{{SenderHref}}", 'none')
+            .replaceAll("{{SenderName}}", topic.ArticlesInfo.RealName);
+        Data.tbody.innerHTML += HTML;
+    }
+};
+function getAll(Path) {
+    return Promise.all([GetTopics(), GetHTML(Path)])
 }

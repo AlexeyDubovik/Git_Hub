@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Topic";
+    var user = ViewData["authUser"] as Forum.DAL.Entities.User;
+}
+@if (ViewData["authUser"] == null)
+{
+    <div class="container-custom">
+        <i>You need to <a href="/@ViewData["Locale"]/Auth/Index">log in</a></i>
+    </div>
+}
+else
+{
+    <div id="@ViewData["Topic-id"]" class="Topic" style="margin-top:20px;">
+        <div class="">
+            <table id="TopicArticles" class="TopicsTable" align="center" data-author-id="@user!.ID" data-topic-id="@ViewData["Topic-id"]">
+            </table>
+        </div>
+        <div class="" align="center">
+            <b>Comment</b>
+            <br />
+            <textarea id="Article_Textarea" class="Article_Textarea" data-author-id="@user!.ID" data-topic-id="@ViewData["Topic-id"]" ></textarea>
+            <br />
+            <button id="button-publish" class="CustomButton">Send</button>
+        </div>
+    </div>
+    <script type="module" src="~/js/TopicInside.js"></script>
+}

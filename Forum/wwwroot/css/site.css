@@ -15,6 +15,10 @@ html {
     }
 }
 
+a {
+    text-decoration: none;
+}
+
 body {
     margin-bottom: 60px;
     color: #f6f6f68c;
@@ -30,14 +34,26 @@ nav {
 
 .container {
     position: relative;
+    min-height: 50vh;
 }
 
 .container-md {
     display: flex;
     justify-content: center;
+    align-items: center;
     max-width: 600px;
 }
-
+.container-custom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column;
+}
 .navbar-brand {
     color: rgb(84,108,96);
 }
@@ -114,8 +130,8 @@ nav {
 }
 
 #LoginSVG {
+    height: 30vh;
     fill: rgb(27, 31, 38);
-    /*fill: #340707;*/
     filter: drop-shadow(0 0 0.1rem rgb(24, 163, 93));
 }
 
@@ -128,8 +144,11 @@ nav {
     width: 270%;
 }
 
+/*SVG Layout*/
+
 #HomeBack {
     right: 40%;
+    /*height: 80vh;*/
     filter: drop-shadow(0 0 0.1rem rgb(69, 124, 96));
     animation-name: back;
     animation-duration: 4s;
@@ -137,27 +156,28 @@ nav {
     animation-direction: alternate-reverse;
 }
 
+#HomeBack_1 {
+    left: 40%;
+    /*height: 80vh;*/
+    filter: drop-shadow(0 0 0.1rem rgb(69, 124, 96));
+    animation-name: back_1;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+}
+
+/*SVG Animation Layout*/
+
 @keyframes back {
     from {
         fill: rgb(29, 36, 49, 0.8);
         filter: drop-shadow(0 0 0.4rem rgb(21, 172, 96));
-        /*fill: rgb(21, 172, 96);
-        filter: drop-shadow(0 0 0.4rem rgb(29, 36, 49));*/
     }
 
     to {
         fill: black;
         filter: drop-shadow(0 0 0.1rem rgb(25, 113, 68));
     }
-}
-
-#HomeBack_1 {
-    left: 40%;
-    filter: drop-shadow(0 0 0.1rem rgb(69, 124, 96));
-    animation-name: back_1;
-    animation-duration: 4s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate-reverse;
 }
 
 @keyframes back_1 {
@@ -173,8 +193,6 @@ nav {
 }
 
 #ProfileSVG {
-    /*fill: rgb(27, 31, 38);*/
-    /*fill: #340707;*/
     filter: drop-shadow(0 0 0.1rem rgb(24, 163, 93));
 }
 
@@ -287,7 +305,7 @@ input[type="file"] {
     justify-content: center;
     align-items: center;
 }
-
+/*info window in profile*/
 .info {
     position: absolute;
     top: 50%;
@@ -307,41 +325,95 @@ input[type="file"] {
     color: red;
 }
 
+/*Topic*/
 
-.TopicTable {
+.TopicsTable {
     border-collapse: collapse;
     text-align: center;
     background: #202931;
+    width:80%;
 }
-.TopicTable tr th {
+
+.TopicsTable tr th {
     padding: 10px;
     border: 1px solid white;
 }
-.TopicTable tr td {
-    padding: 10px;
+
+.TopicsTable tr td {
     border: 1px solid white;
 }
-/*.Topic tr th:nth-child(1) {
-    width: 20%;
-}*/
-/*.TopicTable tbody tr td:nth-child(0) {
-    width: 50%;
-    background: red;
-}*/
-#Author_Href {
+
+.Author_Href {
     color: rgb(53, 95, 170);
     text-decoration: none;
 }
-#Author_Href:hover {
+
+.Author_Href:hover {
     color: rgb(6, 59, 155);
 }
-#topic_Href {
+
+.topic_Href {
     color: rgb(24, 163, 93);
     text-decoration: none;
 }
-#topic_Href:hover {
+
+.topic_Href:hover {
     color: rgb(45, 107, 76);
 }
-#topic_Field {
+
+.topic_Field {
     width: 50%;
+}
+
+/*Articles*/
+.poster_info{
+    min-width:150px;
+}
+
+.message {
+    text-align: justify;
+    width: 100%;
+    position:relative;
+}
+
+.post_head {
+    top: 0;
+    position: absolute;
+    display:flex;
+    border-bottom: 1px solid white;
+    height: 30px;
+    width: 100%;
+}
+
+.post-time{
+    flex-basis: 100%;
+}
+
+.post_wrap {
+    position: absolute;
+    top: 35px;
+    max-width: 1539px;
+    word-wrap: break-word;
+    padding:5px;
+}
+
+ul.inlined, ul.inlined > li {
+    display: inline-block;
+    margin: 0;
+}
+
+.clear {
+    clear: both;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    overflow: hidden;
+}
+
+.Article_Textarea {
+    width: 55%;
+    min-height: 150px;
+    background: #142726;
+    color: rgb(8, 161, 84);
+    text-shadow: 1px 1px 2px black;
 }
