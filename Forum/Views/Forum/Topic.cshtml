@@ -1,11 +1,12 @@
-﻿@{
-    ViewData["Title"] = "Topic";
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
     var user = ViewData["authUser"] as Forum.DAL.Entities.User;
 }
 @if (ViewData["authUser"] == null)
 {
     <div class="container-custom">
-        <i>You need to <a href="/@ViewData["Locale"]/Auth/Index">log in</a></i>
+        <i>@Localizer["AuthAlert1"]<a href="/@ViewData["Locale"]/Auth/Index">@Localizer["AuthAlert2"]</a></i>
     </div>
 }
 else
@@ -15,12 +16,32 @@ else
             <table id="TopicArticles" class="TopicsTable" align="center" data-author-id="@user!.ID" data-topic-id="@ViewData["Topic-id"]">
             </table>
         </div>
-        <div class="" align="center">
-            <b>Comment</b>
+        <div class="creater_post" align="center">
+            <b>@Localizer["CommentHeader"]</b>
+            <ul id="CP-button-row" class="CP-button-row">
+                <li id="CP-bold-button" class="CP-button" style="left:   0px;"><span style="background-position:    0px -20px;"></span></li>
+                <li id="CP-italic-button" class="CP-button" style="left:  25px;"><span style="background-position:  -20px -20px;"></span></li>
+                <li id="CP-spacer1" class="CP-spacer" style="left:  50px;"><span style="background-position:  -40px -20px;"></span></li>
+                <li id="CP-link-button" class="CP-button" style="left:  75px;"><span style="background-position:  -40px -20px;"></span></li>
+                <li id="CP-quote-button" class="CP-button" style="left: 100px;"><span style="background-position:  -60px -20px;"></span></li>
+                <li id="CP-code-button" class="CP-button" style="left: 125px;"><span style="background-position:  -80px -20px;"></span></li>
+                <li id="CP-image-button" class="CP-button" style="left: 150px;"><span style="background-position: -100px -20px;"></span></li>
+                <li id="CP-spacer2" class="CP-spacer" style="left: 175px;"><span style="background-position: -120px -20px;"></span></li>
+                <li id="CP-olist-button" class="CP-button" style="left: 200px;"><span style="background-position: -120px -20px;"></span></li>
+                <li id="CP-ulist-button" class="CP-button" style="left: 225px;"><span style="background-position: -140px -20px;"></span></li>
+                <li id="CP-heading-button" class="CP-button" style="left: 250px;"><span style="background-position: -160px -20px;"></span></li>
+                <li id="CP-hr-button" class="CP-button" style="left: 275px;"><span style="background-position: -180px -20px;"></span></li>
+                <li id="CP-spacer3" class="CP-spacer" style="left: 300px;"><span style="background-position: -200px -20px;"></span></li>
+                <li id="CP-undo-button" class="CP-button" style="left: 325px;"><span style="background-position: -200px -20px;"></span></li>
+                <li id="CP-redo-button" class="CP-button" style="left: 350px;"><span style="background-position: -220px -20px;"></span></li>
+                <li class="CP-spacer CP-spacer-max"></li>
+            </ul>
+            <textarea id="Article_Textarea" class="Article_Textarea" data-author-id="@user!.ID" data-topic-id="@ViewData["Topic-id"]">@*<img src="/img/default.png" style="width:500px">*@</textarea>
             <br />
-            <textarea id="Article_Textarea" class="Article_Textarea" data-author-id="@user!.ID" data-topic-id="@ViewData["Topic-id"]" ></textarea>
+            <button id="button-publish" class="CustomButton">@Localizer["ButtonSend"]</button>
             <br />
-            <button id="button-publish" class="CustomButton">Send</button>
+            <div class="PreView">
+            </div>
         </div>
     </div>
     <script type="module" src="~/js/TopicInside.js"></script>

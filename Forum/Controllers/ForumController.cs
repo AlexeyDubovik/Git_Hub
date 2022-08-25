@@ -11,12 +11,17 @@ namespace Forum.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IAuthService _authService;
         private readonly IStringLocalizer<ForumController> _localizer;
+        private readonly DAL.Context.IntroContext _introContext;
 
-        public ForumController(IStringLocalizer<ForumController> localizer, ILogger<HomeController> logger, IAuthService authService)
+        public ForumController(IStringLocalizer<ForumController> localizer, 
+            ILogger<HomeController> logger, 
+            IAuthService authService, 
+            DAL.Context.IntroContext introContext)
         {
             _localizer = localizer;
             _logger = logger;
             _authService = authService;
+            _introContext = introContext;
         }
         public override void OnActionExecuting(ActionExecutingContext context)
         {
@@ -44,8 +49,18 @@ namespace Forum.Controllers
         }
         public IActionResult Topic(string id)
         {
-            ViewData["Topic-id"] = id;
-            return View();
+            Guid guid = Guid.Empty;
+            try
+            {
+                guid = Guid.Parse(id);
+                ViewData["Topic-id"] = id;
+                ViewData["Title"] = _introContext.Topics!.Find(guid)!.Title;
+                return View();
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

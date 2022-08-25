@@ -1,16 +1,18 @@
-﻿@{
-    ViewData["Title"] = "Forum Page";
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = @Localizer["Title"];
 }
-<h1 align="center" >Forum</h1>
+<h1 align="center" >@ViewData["Title"]</h1>
 <div class="container-custom">  
     <table id="Forum" class="TopicsTable" align="center">
         <thead>
             <tr>
                 <th></th>
-                <th>Topics</th>
-                <th>Answers</th>
-                <th>Author</th>
-                <th>Last Message</th>
+                <th>@Localizer["TH1"]</th>
+                <th>@Localizer["TH2"]</th>
+                <th>@Localizer["TH3"]</th>
+                <th>@Localizer["TH4"]</th>
             </tr>
         </thead>
         <tbody>

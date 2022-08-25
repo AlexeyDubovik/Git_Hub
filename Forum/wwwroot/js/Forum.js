@@ -28,10 +28,10 @@ function injectTopics(Data) {
             .replaceAll("{{TopicTitle}}", topic.Title)
             .replaceAll("{{TopicDescrtiption}}", topic.Descrtiption)
             .replaceAll("{{ArticleCount}}", topic.ArticlesInfo.Count)
-            .replaceAll("{{AuthorHref}}", 'none')
+            .replaceAll("{{AuthorHref}}", '#')
             .replaceAll("{{RealName}}", topic.Author.RealName)
             .replaceAll("{{LastArtDate}}", Data.date)
-            .replaceAll("{{SenderHref}}", 'none')
+            .replaceAll("{{SenderHref}}", '#')
             .replaceAll("{{SenderName}}", topic.ArticlesInfo.RealName);
         Data.tbody.innerHTML += HTML;
     }

@@ -2,34 +2,76 @@ html {
     font-size: 14px;
 }
 
-@media (min-width: 768px) {
+/*-----------------------------------------------------------------
+    Media (Adaptation)
+-----------------------------------------------------------------*/
+
+@media (min-width: 768px){
     html {
         font-size: 16px;
     }
-}
-
-@media (max-width: 600px) {
-    .container-md {
-        flex-direction: column;
-        max-width: 600px;
+    .creater_post {
+        margin: 0 10% 0 10%;
     }
 }
 
+@media (min-width: 992px) {
+    .TopicsTable {
+        width: 80%;
+    }
+
+    .creater_post {
+        margin: 0 20% 0 20%;
+    }
+}
+
+@media (min-width: 1400px) {
+    .creater_post {
+        margin: 0 25% 0 25%;
+    }
+}
+
+@media (max-width: 700px) {
+    .container-md {
+        flex-direction: column;
+        max-width: 700px;
+    }
+    .navbar-nav{
+        padding-left: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .creater_post {
+        width: 100%;
+        margin: auto;
+    }
+}
+
+@media (max-width: 991px) {
+    .TopicsTable {
+        width: 100%;
+    }
+}
+
+/*-----------------------------------------------------------------
+    containers & other
+-----------------------------------------------------------------*/
+
 a {
     text-decoration: none;
+}
+
+.AuthForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 body {
     margin-bottom: 60px;
     color: #f6f6f68c;
     background: black;
-}
-
-nav {
-    border-bottom: 1px solid #A21616;
-    justify-content: space-between;
-    display: block;
-    background: linear-gradient(354deg, rgba(84,108,96,0.5) 4%, rgba(60,80,89,0.5) 38%, rgba(46,57,77,0.8) 84%);
 }
 
 .container {
@@ -54,6 +96,30 @@ nav {
     align-items: center;
     flex-direction:column;
 }
+
+.cls-1 {
+    fill: none;
+    stroke: #ffd800;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2px;
+}
+
+.UserProfile {
+    color: rgb(84,108,96);
+    filter: drop-shadow(0 0 0.1rem rgba(46,57,77,1));
+    text-shadow: 1px 2px 20px rgb(67, 160, 113);
+}
+/*-----------------------------------------------------------------
+    NavBar
+-----------------------------------------------------------------*/
+nav {
+    border-bottom: 1px solid #A21616;
+    justify-content: space-between;
+    display: block;
+    background: linear-gradient(354deg, rgba(84,108,96,0.5) 4%, rgba(60,80,89,0.5) 38%, rgba(46,57,77,0.8) 84%);
+}
+
 .navbar-brand {
     color: rgb(84,108,96);
 }
@@ -88,6 +154,18 @@ nav {
     color: #4e9d76;
 }
 
+/*-----------------------------------------------------------------
+    Container SVG & SVG (Avatar,RegForm)
+-----------------------------------------------------------------*/
+.svgBody {
+    position: absolute;
+    z-index: -1;
+    stroke: blue;
+    height: 100%;
+    width: 100%;
+    transition: 1s;
+}
+
 #Container_Avatar_Reg {
     padding: 2em 2em 2em;
     position: relative;
@@ -120,15 +198,6 @@ nav {
     filter: drop-shadow(0 0 0.1rem #A21616);
 }
 
-.svgBody {
-    position: absolute;
-    z-index: -1;
-    stroke: blue;
-    height: 100%;
-    width: 100%;
-    transition: 1s;
-}
-
 #LoginSVG {
     height: 30vh;
     fill: rgb(27, 31, 38);
@@ -144,7 +213,9 @@ nav {
     width: 270%;
 }
 
-/*SVG Layout*/
+/*-----------------------------------------------------------------
+    SVG Layout
+-----------------------------------------------------------------*/
 
 #HomeBack {
     right: 40%;
@@ -166,7 +237,9 @@ nav {
     animation-direction: alternate-reverse;
 }
 
-/*SVG Animation Layout*/
+/*-----------------------------------------------------------------
+    SVG & Animation Layout
+-----------------------------------------------------------------*/
 
 @keyframes back {
     from {
@@ -191,6 +264,10 @@ nav {
         filter: drop-shadow(0 0 0.1rem rgb(69, 124, 96));
     }
 }
+
+/*-----------------------------------------------------------------
+   Avatar & Logo
+-----------------------------------------------------------------*/
 
 #ProfileSVG {
     filter: drop-shadow(0 0 0.1rem rgb(24, 163, 93));
@@ -236,19 +313,9 @@ nav {
     cursor: pointer;
 }
 
-.cls-1 {
-    fill: none;
-    stroke: #ffd800;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 2px;
-}
-
-.UserProfile {
-    color: rgb(84,108,96);
-    filter: drop-shadow(0 0 0.1rem rgba(46,57,77,1));
-    text-shadow: 1px 2px 20px rgb(67, 160, 113);
-}
+/*-----------------------------------------------------------------
+    CustomButton Avatar Upload
+-----------------------------------------------------------------*/
 
 .CustomButton {
     border: 1px solid;
@@ -300,12 +367,9 @@ input[type="file"] {
     transition: 1s;
 }
 
-.AuthForm {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-/*info window in profile*/
+/*-----------------------------------------------------------------
+    info window in profile
+-----------------------------------------------------------------*/
 .info {
     position: absolute;
     top: 50%;
@@ -325,13 +389,15 @@ input[type="file"] {
     color: red;
 }
 
-/*Topic*/
+/*-----------------------------------------------------------------
+    Topic
+-----------------------------------------------------------------*/
 
 .TopicsTable {
     border-collapse: collapse;
     text-align: center;
     background: #202931;
-    width:80%;
+    /*width: 100%;*/
 }
 
 .TopicsTable tr th {
@@ -365,36 +431,62 @@ input[type="file"] {
     width: 50%;
 }
 
-/*Articles*/
-.poster_info{
-    min-width:150px;
+/*-----------------------------------------------------------------
+    Articles
+-----------------------------------------------------------------*/
+
+.Topic {
+    /*border: 1px solid red;*/
+}
+
+tbody {
+    border: 1px solid white;
+}
+
+.poster_info {
+    width: 125px;
+    vertical-align: top;
+}
+
+.Post_Author{
+    width:100%;
 }
 
 .message {
+    vertical-align: top;
     text-align: justify;
-    width: 100%;
-    position:relative;
+    /*width: 100%;*/
+}
+
+.poster_btn {
+    height: 30px;
 }
 
 .post_head {
-    top: 0;
-    position: absolute;
-    display:flex;
-    border-bottom: 1px solid white;
+    display: flex;
     height: 30px;
     width: 100%;
+    border-bottom: 1px solid white;
 }
 
 .post-time{
+    margin-left: 5px;
     flex-basis: 100%;
 }
 
 .post_wrap {
-    position: absolute;
-    top: 35px;
-    max-width: 1539px;
     word-wrap: break-word;
-    padding:5px;
+    padding: 5px;
+}
+
+.post_body {
+    min-height: 150px;
+}
+
+.post_body img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
 }
 
 ul.inlined, ul.inlined > li {
@@ -410,10 +502,170 @@ ul.inlined, ul.inlined > li {
     overflow: hidden;
 }
 
+/*-----------------------------------------------------------------
+    Article Creater
+-----------------------------------------------------------------*/
+
 .Article_Textarea {
-    width: 55%;
-    min-height: 150px;
+    width: 100%;
+    min-height: 180px;
     background: #142726;
     color: rgb(8, 161, 84);
     text-shadow: 1px 1px 2px black;
+}
+
+.creater_post {
+    /* min-width: 600px;*/
+    /*border:1px solid blue;*/
+}
+
+.CP-button-row {
+    overflow: hidden;
+    border: 1px solid white;
+    border-bottom: none;
+    border-radius: 7px 7px 0 0;
+    padding: 0;
+    padding-left: 10px;
+    margin: 0;
+    display: flex;
+    list-style: none;
+    height: 44px;
+}
+
+.CP-button-row li {
+    display: inline;
+    margin-right: 5px;
+    padding: 6px;
+}
+
+#CP-bold-button {
+    background-image: url(../Icon/bold.svg);
+    background-size: 17px;
+}
+
+#CP-italic-button {
+    background-image: url(../Icon/italic.svg);
+    background-size: 17px;
+}
+
+#CP-link-button {
+    background-image: url(../Icon/link.svg);
+    background-size: 18px;
+}
+
+#CP-quote-button {
+    background-image: url(../Icon/quote.svg);
+    background-size: 17px;
+}
+
+#CP-code-button {
+    background-image: url(../Icon/braces.svg);
+}
+
+#CP-image-button {
+    background-image: url(../Icon/image.svg);
+}
+
+#CP-olist-button {
+    background-image: url(../Icon/list-number.svg);
+}
+
+#CP-ulist-button {
+    background-image: url(../Icon/list.svg);
+}
+
+#CP-heading-button {
+    background-image: url(../Icon/align-head.svg);
+    background-size: 35px;
+}
+
+#CP-hr-button {
+    background-image: url(../Icon/align-center.svg);
+    background-size: 35px;
+}
+
+#CP-undo-button {
+    background-image: url(../Icon/undo.svg);
+}
+
+#CP-redo-button {
+    background-image: url(../Icon/redo.svg);
+}
+
+.CP-button {
+    max-width: 28px;
+    height: 44px;
+    padding: 0;
+    padding: 12px 0 0 0;
+    /*box-shadow: inset 0 0 5px 2px rgb(24, 163, 93);*/
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex: 10 0 23px;
+    cursor: pointer;
+}
+.CP-button:hover{
+    filter: drop-shadow(0.1rem 0.1rem 0.03rem rgba(24, 163, 93));
+   /* box-shadow: inset 0 0 10px 2px rgba(46,57,77,1);*/
+    transform:scale(1.2);
+    transition:0.3s;
+}
+.CP-spacer-max {
+    max-width: none;
+}
+
+.CP-spacer {
+    height: 44px;
+    flex: 1 0 4px;
+    max-width: 27px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    position: relative;
+    left: 4px;
+    z-index:-1;
+}
+
+.PreView {
+    min-height: 172px;
+    text-align: left;
+    padding: 10px;
+    margin-top: 5px;
+    background: #202931;
+    border: 1px solid white;
+    display:none;
+}
+
+.Quote {
+    width:100%;
+    display: block;
+    border: 1px solid rgb(84,108,96);
+    box-shadow: 0 0 20px rgb(84,108,96);
+    border-radius: 10px;
+    text-align: left;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+.Quoted {
+    padding-left: 10px;
+    background: linear-gradient(153deg, rgb(84,108,96) 0%, rgba(32,41,49,1) 45%);
+}
+.quoteMessage {
+    margin-top: -5px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+.hiddenMessage{
+    display: none;
+}
+
+#modal {
+    text-align:justify;
+    max-width: 600px;
+    border: 1px solid rgb(84,108,96);
+    background: rgba(46,57,77,1);
+    position: absolute;
+    display: block;
+    padding: 5px;
 }

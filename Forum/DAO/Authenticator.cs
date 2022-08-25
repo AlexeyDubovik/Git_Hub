@@ -10,7 +10,7 @@ namespace Forum.DAO
         {
             this.Users = Users;
         }
-        public Guid? Authenticate(Models.RegUserModel UserData, IHasher _hasher)
+        public Guid? Authenticate(Models.UserModel UserData, IHasher _hasher)
         {
             if (UserData == null)
                 return null;

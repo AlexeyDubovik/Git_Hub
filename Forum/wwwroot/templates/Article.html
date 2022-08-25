@@ -1,13 +1,15 @@
-﻿<tbody id='{{post}}' class="post">
+﻿<tbody id='{{ArticleID}}' class="post">
     <tr>
         <td class="poster_info">
-            <p class="RealName">{{RealName}} {{Atribute}}</p>
-            <p class="avatar">
-                {{Avatar}}
-            </p>
-            <br>
+            <div class="Post_Author">
+                <p class="RealName">{{RealName}} {{Atribute}}</p>
+                <p class="avatar">
+                    {{Avatar}}
+                </p>
+                <br>
+            </div>
         </td>
-        <td class="message" rowspan="2">
+        <td class="message" rowspan="2" style="border:none">
             <div class="post_head">
                 <p class="post-time">
                     <span class="hl-scrolled-to-wrap">
@@ -30,8 +32,8 @@
     <tr>
         <td class="poster_btn">
             <div style="padding: 2px 6px 4px;" class="post_btn_2">
-                <a class="txtb" href="{{Profile}}">[Profile]</a>&nbsp;
-                <a class="txtb" href="{{PM}}">[PM]</a>&nbsp;
+                <a class="txtb" href="{{ProfileHref}}">[Profile]</a>&nbsp;
+                <a class="txtb" href="{{PMHref}}">[PM]</a>&nbsp;
             </div>
         </td>
     </tr>

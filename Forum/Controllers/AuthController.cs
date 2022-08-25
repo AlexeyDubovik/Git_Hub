@@ -63,7 +63,7 @@ namespace Forum.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult AuthUser(Models.RegUserModel UserData)
+        public IActionResult AuthUser(Models.UserModel UserData)
         {
             String[] err = new String[3];
             String[] data = new String[1];
@@ -123,7 +123,7 @@ namespace Forum.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult RegUser(Models.RegUserModel UserData)
+        public IActionResult RegUser(Models.UserModel UserData)
         {
             String[] err = new String[7];
             String[] dataField = new String[4];
@@ -246,7 +246,7 @@ namespace Forum.Controllers
                 return "User is null";
         }
         [HttpPost]
-        public IActionResult ChangeUserPassword(Models.ChUserPasswordModel PassForm)
+        public IActionResult ChangeUserPassword(Models.PasswordUserModel PassForm)
         {
             if (_authService.User == null)
                 return Redirect("/Home/Index");

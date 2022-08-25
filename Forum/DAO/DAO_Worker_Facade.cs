@@ -34,7 +34,7 @@ namespace Forum.Services
                 userCheck = new CheckUserLogin(introContext.Users!);
             return userCheck.Check(str);
         }
-        public Guid? Authenticator(Models.RegUserModel UserData)
+        public Guid? Authenticator(Models.UserModel UserData)
         {
             return authenticator.Authenticate(UserData, hasher);
         }
@@ -53,7 +53,7 @@ namespace Forum.Services
             Picture.CopyToAsync(file).ContinueWith(f => file.Dispose());
             return ImageName + IMG_Format;
         }
-        public void CreateUser(Models.RegUserModel UserData)
+        public void CreateUser(Models.UserModel UserData)
         {
             if (UserData != null && introContext.Users != null)
             {
@@ -112,7 +112,7 @@ namespace Forum.Services
             else
                 return "Error";
         }
-        public String ChangeUserPassword(DAL.Entities.User User, Models.ChUserPasswordModel PassForm)
+        public String ChangeUserPassword(DAL.Entities.User User, Models.PasswordUserModel PassForm)
         {
             if (User == null)
                 return "Error User is null";
@@ -149,7 +149,7 @@ namespace Forum.Services
                     return "Error";
                 }
         }
-        public IQueryable? GetTopics(GuidType GType, Guid? guid = null)
+        public dynamic? GetTopics(GuidType GType, Guid? guid = null)
         {
             if (guid == null && GType != GuidType.All) {
                 return null;
@@ -190,7 +190,7 @@ namespace Forum.Services
                         Login       = t.articles!.OrderBy(a => a.CreatedDate).LastOrDefault()!.Author!.Login,
                         Email       = t.articles!.OrderBy(a => a.CreatedDate).LastOrDefault()!.Author!.Email,
                     }
-                });
+                }).ToList().OrderByDescending(topic => topic.ArticlesInfo.CreatedDate);
         }
         public IQueryable? GetArticles(GuidType GType, Guid? guid = null)
         {

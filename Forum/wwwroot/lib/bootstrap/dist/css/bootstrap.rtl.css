@@ -7881,7 +7881,7 @@ textarea.form-control-lg {
   visibility: hidden !important;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 700px) {
   .float-sm-start {
     float: right !important;
   }

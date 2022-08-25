@@ -24,8 +24,6 @@ namespace Forum.API
             _GuidCheck = guidCheck;
             _DAO = DAO;
         }
-
-        // GET: api/<UserController>
         [HttpGet]
         public string Get(string? login, string? password)
         {
@@ -56,8 +54,6 @@ namespace Forum.API
                 return $"{ login ?? "--" } { password ?? "--" }";
             }
         }
-
-        // GET api/<UserController>/5
         [HttpGet("{id}")]
         public object Get(String? id)
         {
@@ -71,19 +67,14 @@ namespace Forum.API
             }
             return user with { PassHash = "***", PassSalt = "***"};
         }
-
-        // POST api/<UserController>
         [HttpPost]
         public string Post([FromBody] string value)
         {
             return $"POST {value}";
         }
-
-        // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public String Put(string id, [FromForm] Models.RegUserModel userData)
+        public String Put(string id, [FromForm] Models.UserModel userData)
         {
-            string Avatar = "";
             Guid guid = _GuidCheck.Check(HttpContext, id);
             if (guid == Guid.Empty)
                 return "Conflict: invalid id format (GUID required)";
@@ -95,7 +86,7 @@ namespace Forum.API
             }
             if (userData == null) {
                 HttpContext.Response.StatusCode = 409;
-                return "Conflict:Data is null";
+                return "Conflict: Data is null";
             }
             if (userData.Login != null) {
                 Result[0] = _DAO.ChangeUserLogin(user, userData.Login);
@@ -108,10 +99,9 @@ namespace Forum.API
             }
             if (userData.Avatar != null) {
                 Result[3] = _DAO.ChangeUserAvatar(user, userData.Avatar);
-                Avatar = user.Avatar;
             }
             if (userData.Password1 != null && userData.Password2 != null) {
-                Models.ChUserPasswordModel PassForm = new Models.ChUserPasswordModel();
+                Models.PasswordUserModel PassForm = new Models.PasswordUserModel();
                 PassForm.OldPassword  = userData.Password1;
                 PassForm.NewPassword1 = userData.Password2;
                 PassForm.NewPassword2 = userData.Password2;
@@ -128,8 +118,6 @@ namespace Forum.API
             };
             return JsonSerializer.Serialize(userToJson);
         }
-
-        // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
         public string Delete(int id)
         {
