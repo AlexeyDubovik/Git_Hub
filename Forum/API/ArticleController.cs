@@ -26,12 +26,14 @@ namespace Forum.API
             Guid guid = _GuidCheck.Check(HttpContext, TopicID);
             if (guid == Guid.Empty)
                 return "Conflict: invalid id format (GUID required)";
-            if (_context.Topics!.Find(guid) == null) {
+            if (_context.Topics!.Find(guid) == null)
+            {
                 HttpContext.Response.StatusCode = 404;
                 return "Not Found: topic absent";
             }
             var Articles = _DAO.GetArticles(DAO_Worker_Facade.GuidType.Topic, guid);
-            if (Articles == null) {
+            if (Articles == null)
+            {
                 HttpContext.Response.StatusCode = 404;
                 return "Not Found: Topic empty";
             }
@@ -43,15 +45,18 @@ namespace Forum.API
             Guid authorId = _GuidCheck.Check(HttpContext, AuthorId);
             if (authorId == Guid.Empty)
                 return "Conflict: invalid id format (GUID required)";
-            if (_context.Users!.Find(authorId) == null) {
+            if (_context.Users!.Find(authorId) == null)
+            {
                 HttpContext.Response.StatusCode = 404;
                 return "Not Found: user with this id does not exist";
             }
-            if (_context.Topics!.Find(articleModel.TopicId) == null) {
+            if (_context.Topics!.Find(articleModel.TopicId) == null)
+            {
                 HttpContext.Response.StatusCode = 404;
                 return "Not Found: topic absent";
             }
-            if (articleModel.Text != null) {
+            if (articleModel.Text != null)
+            {
                 var NewArticle = new DAL.Entities.Article
                 {
                     Id = new Guid(),
@@ -68,5 +73,54 @@ namespace Forum.API
             HttpContext.Response.StatusCode = 418;
             return $" I’m a teapot";
         }
+        [HttpDelete("{ArticleID}")]
+        public object Delete(String ArticleID, [FromHeader] String UserID)
+        {
+            Guid articleID = _GuidCheck.Check(HttpContext, ArticleID);
+            Guid userID = _GuidCheck.Check(HttpContext, UserID);
+            if (articleID == Guid.Empty || userID == Guid.Empty)
+                return "Conflict: invalid id format (GUID required)";
+            var user = _context.Users!.Find(userID);
+            var article = _context.Articles!.Find(articleID);
+            if (user == null)
+            {
+                HttpContext.Response.StatusCode = 404;
+                return "Not Found: user with this id does not exist";
+            }
+            if (article == null)
+            {
+                HttpContext.Response.StatusCode = 404;
+                return "Not Found: Article absent";
+            }
+            if (article.StatusJournal != null && article.StatusJournal
+                .OrderByDescending(S => S.OperationDate)
+                .FirstOrDefault()!.IsDeleted == true)
+            {
+                HttpContext.Response.StatusCode = 406;
+                return "Not Acceptable : Article already deleted";
+            }
+            if (article.ReplyId != null)
+            {
+                HttpContext.Response.StatusCode = 406;
+                return "Not Acceptable : Article has reply";
+            }
+            if (article.AuthorId != user.ID)
+            {
+                HttpContext.Response.StatusCode = 403;
+                return "Forbidden : You have no rights";
+            }
+            var Status = new DAL.Entities.DeleteArticleStatus
+            {
+                ID = Guid.NewGuid(),
+                ArticleID = articleID,
+                UserID = userID,
+                IsDeleted = true,
+                OperationDate = DateTime.Now
+            };
+            _context.Add(Status);
+            _context.SaveChanges();
+            return JsonSerializer.Serialize(Status);
+        }
+
     }
 }

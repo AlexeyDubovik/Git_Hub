@@ -14,7 +14,9 @@ namespace Forum.DAL.Entities
         public Guid AuthorId { get; set; }
         public User? Author { get; set; }
         public Guid? ReplyId { get; set; }
-        public Article? Reply { get; set; }
+        [ForeignKey("ReplyId")]
+        public List<Article>? Replys { get; set; }
+        public List<DeleteArticleStatus>? StatusJournal { get; set; }
         public DateTime CreatedDate { get; set; }
     }
 }

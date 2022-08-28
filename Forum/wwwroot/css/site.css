@@ -470,13 +470,13 @@ tbody {
 }
 
 .post-time{
-    margin-left: 5px;
+    margin-left: 10px;
     flex-basis: 100%;
 }
 
 .post_wrap {
     word-wrap: break-word;
-    padding: 5px;
+    padding: 5px 10px 5px 10px;
 }
 
 .post_body {
@@ -492,6 +492,7 @@ tbody {
 ul.inlined, ul.inlined > li {
     display: inline-block;
     margin: 0;
+    padding: 0 5px 0 0;
 }
 
 .clear {
@@ -502,10 +503,29 @@ ul.inlined, ul.inlined > li {
     overflow: hidden;
 }
 
+.ArticleIcon {
+    width: 15px;
+    filter: invert(42%) sepia(13%) saturate(752%) hue-rotate(87deg) brightness(119%) contrast(119%);
+}
+
+#reply:hover {
+    width: 15px;
+    filter: invert(42%) sepia(100%) saturate(1300%) hue-rotate(190deg) brightness(119%) contrast(119%);
+}
+
+
+#edit:hover {
+    width: 15px;
+    filter: invert(42%) sepia(100%) saturate(1300%) hue-rotate(350deg) brightness(119%) contrast(119%);
+}
+
+#delete:hover {
+    width: 15px;
+    filter: invert(42%) sepia(100%) saturate(1300%) hue-rotate(330deg) brightness(90%) contrast(219%);
+}
 /*-----------------------------------------------------------------
     Article Creater
 -----------------------------------------------------------------*/
-
 .Article_Textarea {
     width: 100%;
     min-height: 180px;
@@ -628,12 +648,12 @@ ul.inlined, ul.inlined > li {
 
 .PreView {
     min-height: 172px;
-    text-align: left;
-    padding: 10px;
+    text-align: justify;
+    padding: 5px 10px 5px 10px;
     margin-top: 5px;
     background: #202931;
     border: 1px solid white;
-    display:none;
+    display: none;
 }
 
 .Quote {
@@ -641,9 +661,10 @@ ul.inlined, ul.inlined > li {
     display: block;
     border: 1px solid rgb(84,108,96);
     box-shadow: 0 0 20px rgb(84,108,96);
-    border-radius: 10px;
+    border-radius: 6px;
     text-align: left;
     overflow: hidden;
+    margin-top:10px;
     margin-bottom: 10px;
 }
 .Quoted {
@@ -652,8 +673,11 @@ ul.inlined, ul.inlined > li {
 }
 .quoteMessage {
     margin-top: -5px;
-    padding-left: 10px;
     margin-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    display:inline-block;
+    vertical-align: top;
 }
 
 .hiddenMessage{
@@ -661,11 +685,12 @@ ul.inlined, ul.inlined > li {
 }
 
 #modal {
-    text-align:justify;
+    text-align: justify;
     max-width: 600px;
     border: 1px solid rgb(84,108,96);
     background: rgba(46,57,77,1);
     position: absolute;
     display: block;
-    padding: 5px;
+    padding: 5px 10px 5px 10px;
+    transition: 0.5s;
 }

@@ -160,11 +160,11 @@ namespace Forum.Services
                 GType == GuidType.User  ? t.AuthorId == guid :
                                           t.Id       == t.Id)
                 .Select(t => new {
-                    Id = t.Id,
-                    Title = t.Title,
+                    Id           = t.Id,
+                    Title        = t.Title,
                     Descrtiption = t.Descrtiption,
-                    Culture = t.Culture,
-                    Author = t.Author == null ? null : new
+                    Culture      = t.Culture,
+                    Author       = t.Author == null ? null : new
                     {
                         ID       = t.Author!.ID,
                         Login    = t.Author.Login,
@@ -172,10 +172,14 @@ namespace Forum.Services
                         Email    = t.Author.Email,
                         Avatar   = t.Author.Avatar
                     },
-                    ArticlesInfo = t.articles!.Count == 0 ?
+                    ArticlesInfo = t.articles!.Count(a => a.StatusJournal!
+                                              .OrderBy(S => S.OperationDate)
+                                              .LastOrDefault()!.IsDeleted != true) == 0 ?
                     new
                     {
-                        Count       = t.articles!.Count,
+                        Count       = t.articles!.Count(a => a.StatusJournal!
+                                                 .OrderBy(S => S.OperationDate)
+                                                 .LastOrDefault()!.IsDeleted != true),
                         CreatedDate = DateTime.Parse("11.11.1111"),
                         RealName    = "Empty",
                         Login       = "Empty",
@@ -184,7 +188,9 @@ namespace Forum.Services
                     :
                     new
                     {
-                        Count       = t.articles!.Count,
+                        Count       = t.articles!.Count(a => a.StatusJournal!
+                                                 .OrderBy(S => S.OperationDate)
+                                                 .LastOrDefault()!.IsDeleted != true),
                         CreatedDate = t.articles!.OrderBy(a => a.CreatedDate).LastOrDefault()!.CreatedDate,
                         RealName    = t.articles!.OrderBy(a => a.CreatedDate).LastOrDefault()!.Author!.RealName,
                         Login       = t.articles!.OrderBy(a => a.CreatedDate).LastOrDefault()!.Author!.Login,
@@ -199,53 +205,69 @@ namespace Forum.Services
             }
             return introContext.Articles!
                 .Where(a =>
-                GType == GuidType.Topic   ? a.TopicId  == guid :
+                GType == GuidType.Topic   ? a.TopicId == guid :
                 GType == GuidType.User    ? a.AuthorId == guid :
-                GType == GuidType.Article ? a.Id       == guid :
-                                            a.Id       == a.Id)
+                GType == GuidType.Article ? a.Id == guid :
+                                            a.Id == a.Id)
                 .Select(A => new
                 {
-                    Id          = A.Id,
-                    Text        = A.Text,
+                    Id = A.Id,
+                    Text = A.Text,
+                    Status = A.StatusJournal == null ? null :
+                                  A.StatusJournal!
+                                  .OrderByDescending(S => S.OperationDate)
+                                  .FirstOrDefault()!,
                     CreatedDate = A.CreatedDate,
-                    Reply       = A.Reply == null ? null : new
-                    {
-                        Id     = A.Reply.Id,
-                        Text   = A.Reply.Text,
-                        Author = new
+                    ReplyId = A.ReplyId, 
+                    Replys = A.Replys == null ? null : 
+                    A.Replys!
+                        .Select(R => new
                         {
-                            ID       = A.Reply.Author!.ID,
-                            Login    = A.Reply.Author.Login,
-                            RealName = A.Reply.Author.RealName,
-                            Avatar   = A.Reply.Author.Avatar,
-                            Email    = A.Reply.Author.Email
-                        }
-                    },
+                            Id = R.Id,
+                            Text = R.Text,
+                            Author = new
+                            {
+                                ID = R.Author!.ID,
+                                Login = R.Author.Login,
+                                RealName = R.Author.RealName,
+                                Avatar = R.Author.Avatar,
+                                Email = R.Author.Email
+                            },
+                            Status = R.StatusJournal == null ? null : 
+                            R.StatusJournal!
+                            .OrderByDescending(S => S.OperationDate)
+                            .FirstOrDefault()!,
+                            CreatedDate = R.CreatedDate,
+                            ReplyId = R.ReplyId,
+                            Replys = R.Replys
+                        })
+                        .Where(R => R.Status == null || R.Status.IsDeleted == false),
                     Topic = new
                     {
-                        Id           = A.Topic!.Id,
-                        Title        = A.Topic.Title,
+                        Id = A.Topic!.Id,
+                        Title = A.Topic.Title,
                         Descrtiption = A.Topic.Descrtiption,
-                        Culture      = A.Topic,
+                        Culture = A.Topic.Culture,
                         Author = new
                         {
-                            ID       = A.Topic.Author!.ID,
-                            Login    = A.Topic.Author.Login,
+                            ID = A.Topic.Author!.ID,
+                            Login = A.Topic.Author.Login,
                             RealName = A.Topic.Author.RealName,
-                            Avatar   = A.Topic.Author.Avatar,
-                            Email    = A.Topic.Author.Email
+                            Avatar = A.Topic.Author.Avatar,
+                            Email = A.Topic.Author.Email
                         }
                     },
                     Author = new
                     {
-                        ID       = A.Author!.ID,
-                        Login    = A.Author.Login,
+                        ID = A.Author!.ID,
+                        Login = A.Author.Login,
                         RealName = A.Author.RealName,
-                        Avatar   = A.Author.Avatar,
-                        Email    = A.Author.Email
+                        Avatar = A.Author.Avatar,
+                        Email = A.Author.Email
                     }
-                });
-            
+                })
+                .Where(A => (A.Status == null || A.Status.IsDeleted == false) && A.ReplyId == null);
+
         }
     }
 }

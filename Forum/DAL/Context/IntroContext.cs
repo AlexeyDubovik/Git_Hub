@@ -8,6 +8,7 @@ namespace Forum.DAL.Context
         public DbSet<Entities.User>? Users { get; set; }
         public DbSet<Entities.Topic>? Topics { get; set; }
         public DbSet<Entities.Article>? Articles { get; set; }
+        public DbSet<Entities.DeleteArticleStatus>? SatatusJournal { get; set; }
         public IntroContext(DbContextOptions options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
