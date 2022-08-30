@@ -59,7 +59,7 @@ namespace Forum.Controllers
         {
             ViewData["time"] = _time.Time;
             ViewData["Date"] = _time.Date;
-            ViewData["Users"] = _DAO.introContext.Users == null ? "Empty" : _DAO.introContext.Users?.Count();
+            ViewData["Users"] = _DAO._db.Users == null ? "Empty" : _DAO._db.Users?.Count();
             ViewData["fromAuthMiddleware"] = HttpContext.Items["fromAuthMiddleware"];
             return View();
         }

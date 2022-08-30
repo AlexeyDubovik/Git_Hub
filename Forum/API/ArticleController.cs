@@ -11,27 +11,45 @@ namespace Forum.API
     [ApiController]
     public class ArticleController : Controller
     {
-        private readonly IntroContext _context;
+        private readonly IntroContext _db;
         private readonly HttpRequestGuidCheck _GuidCheck;
         private readonly DAO_Worker_Facade _DAO;
-        public ArticleController(IntroContext context, HttpRequestGuidCheck GuidCheck, DAO_Worker_Facade DAO)
+        public ArticleController(IntroContext db, HttpRequestGuidCheck GuidCheck, DAO_Worker_Facade DAO)
         {
-            _context = context;
+            _db = db;
             _GuidCheck = GuidCheck;
             _DAO = DAO;
         }
-        [HttpGet("{TopicID}")]
-        public object Get(String TopicID)
+        [HttpGet("{ID}")]
+        public object Get(String ID, [FromQuery] String ParamSearch, [FromQuery] String GuidType)
         {
-            Guid guid = _GuidCheck.Check(HttpContext, TopicID);
+            Guid guid = _GuidCheck.Check(HttpContext, ID);
             if (guid == Guid.Empty)
                 return "Conflict: invalid id format (GUID required)";
-            if (_context.Topics!.Find(guid) == null)
+            if (GuidType == "User")
             {
-                HttpContext.Response.StatusCode = 404;
-                return "Not Found: topic absent";
+                if (_db.Users!.Find(guid) == null)
+                {
+                    HttpContext.Response.StatusCode = 404;
+                    return "Not Found: User absent";
+                }
             }
-            var Articles = _DAO.GetArticles(DAO_Worker_Facade.GuidType.Topic, guid);
+            else
+            {
+                if (_db.Topics!.Find(guid) == null)
+                {
+                    HttpContext.Response.StatusCode = 404;
+                    return "Not Found: topic absent";
+                }
+            }
+            var Articles = _DAO.GetArticles(
+                GuidType == "User" 
+                ? DAO_Worker_Facade.GuidType.User
+                : DAO_Worker_Facade.GuidType.Topic, 
+                guid,
+                ParamSearch == "Deleted" 
+                ? DAO_Worker_Facade.Parameters.Deleted
+                : DAO_Worker_Facade.Parameters.Default);
             if (Articles == null)
             {
                 HttpContext.Response.StatusCode = 404;
@@ -45,12 +63,12 @@ namespace Forum.API
             Guid authorId = _GuidCheck.Check(HttpContext, AuthorId);
             if (authorId == Guid.Empty)
                 return "Conflict: invalid id format (GUID required)";
-            if (_context.Users!.Find(authorId) == null)
+            if (_db.Users!.Find(authorId) == null)
             {
                 HttpContext.Response.StatusCode = 404;
                 return "Not Found: user with this id does not exist";
             }
-            if (_context.Topics!.Find(articleModel.TopicId) == null)
+            if (_db.Topics!.Find(articleModel.TopicId) == null)
             {
                 HttpContext.Response.StatusCode = 404;
                 return "Not Found: topic absent";
@@ -66,8 +84,8 @@ namespace Forum.API
                     CreatedDate = DateTime.Now,
                     ReplyId = articleModel.ReplyId
                 };
-                _context.Articles?.Add(NewArticle);
-                _context.SaveChanges();
+                _db.Articles?.Add(NewArticle);
+                _db.SaveChanges();
                 return JsonSerializer.Serialize($"Success: Article {NewArticle.Id} created");
             }
             HttpContext.Response.StatusCode = 418;
@@ -80,8 +98,8 @@ namespace Forum.API
             Guid userID = _GuidCheck.Check(HttpContext, UserID);
             if (articleID == Guid.Empty || userID == Guid.Empty)
                 return "Conflict: invalid id format (GUID required)";
-            var user = _context.Users!.Find(userID);
-            var article = _context.Articles!.Find(articleID);
+            var user = _db.Users!.Find(userID);
+            var article = _db.Articles!.Find(articleID);
             if (user == null)
             {
                 HttpContext.Response.StatusCode = 404;
@@ -117,8 +135,8 @@ namespace Forum.API
                 IsDeleted = true,
                 OperationDate = DateTime.Now
             };
-            _context.Add(Status);
-            _context.SaveChanges();
+            _db.Add(Status);
+            _db.SaveChanges();
             return JsonSerializer.Serialize(Status);
         }
 

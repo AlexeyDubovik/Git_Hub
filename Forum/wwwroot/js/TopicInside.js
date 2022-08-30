@@ -1,12 +1,14 @@
-﻿import { GetHTML, GetArticles } from '/js/FetchRequest.js';
+﻿import { GetHTML, GetArticles, DeleteArticle } from '/js/FetchRequest.js';
 document.addEventListener("DOMContentLoaded", () => {
     const [html] = document.getElementsByTagName("html")
     const Data = {
+        ComentHeader : document.querySelector(".ComentHeader"),
         PreView: document.querySelector(".PreView"),
         Textarea: document.querySelector("textarea"),
         Table: document.getElementById("TopicArticles"),
         Locale: html.getAttribute("lang"),
         TopicId: document.getElementById("TopicArticles").getAttribute("data-topic-id"),
+        AuthUserId: document.getElementById("TopicArticles").getAttribute("data-author-id"),
         Quote: "",
         Count: 0,
         PreViewHidde() {
@@ -21,26 +23,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const buttonPublish = document.getElementById("button-publish");
     if (!buttonPublish) throw "button-publish element not found";
     buttonPublish.onclick = buttonPublishClick(Data);
-    getAll(Data.TopicId,
+    getAll(
+        Data.TopicId,
         '/templates/Article.html',
         '/templates/Quote.html',
         '/templates/ArticleEditButton.html',
-        '/templates/ArticleDeleteButton.html')
+        '/templates/ArticleDeleteButton.html',
+        '/templates/ArticleReplyButton.html')
         .then(([
             Articles,
             templatePost,
             templateQuote,
             templateAEB,
-            templateADB]) => {
+            templateADB,
+            templateARB
+        ]) => {
             if (Articles instanceof Array) {
                 console.log(Articles);
-                Data.templatePost = templatePost;
-                Data.templateQuote = templateQuote;
-                Data.templateADB = templateADB;
-                Data.templateAEB = templateAEB;
-                Data.Articles = Articles;
-                Data.Count = Object.keys(Articles).length;
-                Data.Textarea.onkeyup = TextAreaKeyUp(Data);
+                Data.templatePost      = templatePost;
+                Data.templateQuote     = templateQuote;
+                Data.templateADB       = templateADB;
+                Data.templateAEB       = templateAEB;
+                Data.templateARB       = templateARB;
+                Data.Articles          = Articles;
+                Data.Count             = Object.keys(Articles).length;
+                Data.Textarea.onkeyup  = TextAreaKeyUp(Data);
                 Data.Textarea.onchange = TextAreaChange(Data);
                 FilterArticles(Data);
             }
@@ -72,25 +79,25 @@ function injectArticles(Data) {
         img.src = `/img/${Article.author.avatar}`;
         let text = `<p>${Article.text.replaceAll("\n", "<br>")}</p>`;
         let ButtonDelete = Data.templateADB.replaceAll("{{DeleteHref}}", "#");
-        let ButtonEdit = Data.templateAEB.replaceAll("{{EditHref}}", "#");
+        let ButtonEdit   = Data.templateAEB.replaceAll("{{EditHref}}",  "#Article_Textarea");
+        let ButtonReply  = Data.templateARB.replaceAll("{{ReplyHref}}", "#Article_Textarea");
         let HTML = Data.templatePost
-            .replaceAll("{{ArticleID}}", Article.id)
-            .replaceAll("{{RealName}}", Article.author.realName)
-            .replaceAll("{{Atribute}}", Article.author.id != Article.topic.author.id ? "" : `<i style="color:yellow;">&#9733</i>`)
-            .replaceAll("{{Avatar}}", img.outerHTML)
-            .replaceAll("{{dateHref}}", '#')
-            .replaceAll("{{dateValue}}", new Date(Article.createdDate).toLocaleString(Data.Local))
-            .replaceAll("{{ReplyHref}}", '#Article_Textarea')
-            .replaceAll("{{ArticleButtons}}", Article.replys.length === 0 ? ButtonEdit + ButtonDelete : "")
-            .replaceAll("{{postText}}", text)
-            .replaceAll("{{ProfileHref}}", '#')
-            .replaceAll("{{PMHref}}", '#');
+            .replaceAll("{{ArticleID}}",      Article.id)
+            .replaceAll("{{RealName}}",       Article.author.realName)
+            .replaceAll("{{Atribute}}",       Article.author.id != Article.topic.author.id ? "" : `<i style="color:yellow;">&#9733</i>`)
+            .replaceAll("{{Avatar}}",         img.outerHTML)
+            .replaceAll("{{dateHref}}",       `#${Article.id}`)
+            .replaceAll("{{dateValue}}",      new Date(Article.createdDate).toLocaleString(Data.Local))
+            .replaceAll("{{ArticleButtons}}", Article.replys.length === 0 && Data.AuthUserId === Article.author.id ? ButtonReply + ButtonEdit + ButtonDelete : ButtonReply)
+            .replaceAll("{{postText}}",       text)
+            .replaceAll("{{ProfileHref}}",    '#')
+            .replaceAll("{{PMHref}}",         '#');
         Data.Table.innerHTML += HTML;
     }
     const DeletesButtons = document.querySelectorAll(".delete");
-    const ReplysButtons = document.querySelectorAll(".reply");
+    const ReplysButtons  = document.querySelectorAll(".reply");
     for (let a of DeletesButtons)
-        a.onclick = DeleteClick();
+        a.onclick = DeleteClick(Data);
     for (let a of ReplysButtons)
         a.onclick = ReplyClick(Data);
 }
@@ -103,25 +110,27 @@ function ReplyClick(Data) {
     return (e) => {
         const tbody = e.target.closest('tbody');
         const ReplyID = `${tbody.getAttribute("id")}`;
-        const Article = Data.Articles.filter((element) => {
-            return element.id.indexOf(ReplyID) > -1;
-        });
-        Data.Textarea.value += Data.Textarea.value.length === 0 ?
-            "{{QuotedMessage}}" : "\n" + "{{QuotedMessage}}";
-        const reg = new RegExp("{{QuotedMessage}}");
-        if (reg.test(Article[0].text)) {
-            Article[0].text = Article[0].text.replaceAll("{{QuotedMessage}}", "");
-        }
-        Data.Textarea.dispatchEvent(new Event('change'));
+        Data.ComentHeader.innerHTML = `Ответ на <a href="#${ReplyID}">сообщение</a>`
+        //const Article = Data.Articles.filter((element) => {
+        //    return element.id.indexOf(ReplyID) > -1;
+        //});
+        //const reg = new RegExp("{{QuotedMessage}}");
+        //if (reg.test(Article[0].text)) {
+        //    Article[0].text = Article[0].text.replaceAll("{{QuotedMessage}}", "");
+        //}
+        //Data.Textarea.dispatchEvent(new Event('change'));
+        Data.Textarea.value = "";
         Data.Textarea.setAttribute("data-reply-id", ReplyID);
     }
 }
 
-function DeleteClick() {
+function DeleteClick(Data) {
     return (e) => {
         const tbody = e.target.closest('tbody');
-        const ReplyID = `${tbody.getAttribute("id")}`;
-        console.log(ReplyID);
+        const ArticleID = `${tbody.getAttribute("id")}`;
+        DeleteArticle(ArticleID, Data.AuthUserId).then((res) => {
+            console.log(res);
+        });
     }
 }
 
@@ -134,8 +143,14 @@ function TextAreaKeyUp(Data) {
 function TextAreaChange(Data) {
     return (e) => {
         Data.PreView.innerHTML = e.target.value.length === 0 ? "" :
-            `<p>${e.target.value
-                .replaceAll("\n", "<br>")}</p>`;
+            `<p>
+                ${e.target.value.replaceAll("\n", "<br>")}
+            </p>`;
+        /*Data.PreView.innerHTML = */
+        if (Data.Textarea.value.length === 0) {
+            Data.Textarea.removeAttribute("data-reply-id");
+            Data.ComentHeader.innerHTML = `Коментарий`
+        }
         Data.PreViewHidde();
     }
 }
@@ -183,13 +198,14 @@ async function postArticle(textarea) {
     }
 }
 
-function getAll(TopicID, Path_A, Path_Q, Path_AEB, Path_ADB) {
+function getAll(TopicID, Path_A, Path_Q, Path_AEB, Path_ADB, Path_ARB) {
     return Promise.all([
         GetArticles(TopicID),
         GetHTML(Path_A),
         GetHTML(Path_Q),
         GetHTML(Path_AEB),
-        GetHTML(Path_ADB)
+        GetHTML(Path_ADB),
+        GetHTML(Path_ARB)
     ]);
 }
 

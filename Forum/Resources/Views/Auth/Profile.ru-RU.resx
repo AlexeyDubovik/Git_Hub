@@ -129,6 +129,9 @@
   <data name="Button_Hidde" xml:space="preserve">
     <value>Скрыть</value>
   </data>
+  <data name="DelTableBTN" xml:space="preserve">
+    <value>Удаленные сообщения</value>
+  </data>
   <data name="Link_Pass" xml:space="preserve">
     <value>Изменить пароль</value>
   </data>
@@ -152,5 +155,14 @@
   </data>
   <data name="Placeholder_NewPass" xml:space="preserve">
     <value>Новый пароль</value>
+  </data>
+  <data name="TH1" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="TH2" xml:space="preserve">
+    <value>Топик</value>
+  </data>
+  <data name="TH3" xml:space="preserve">
+    <value>Текст</value>
   </data>
 </root>

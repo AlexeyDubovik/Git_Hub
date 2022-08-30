@@ -7,7 +7,7 @@
     ViewData["Title"] = @User?.RealName;
 }
 <div class="container-custom">
-    <div id="ProfileConteiner" style="position:relative;padding:20px;">
+    <div id="@User!.ID" class="ProfileConteiner" style="position:relative;padding:20px;">
         @if (Inf != null)
         {
             <div class="info">
@@ -427,6 +427,21 @@
                         <input type="password" name="NewPassword2" placeholder=@Localizer["Placeholder_ConfPass"] />    @if (err?[2] != null){<i style="color:red;white-space:nowrap;">@err[2]</i>} <br />
                         <button type="submit" class="CustomButton">@Localizer["Button_Change"]</button><button id="hidde" type="button" class="CustomButton">@Localizer["Button_Hidde"]</button>
                     </form>
+                    <div class="DeletedArticles">
+                        <a href="#" class="DelTableBTN">@Localizer["DelTableBTN"]</a>
+                        <table class="DeleteArticleTable" align="center">
+                            <thead>
+                                <tr>
+                                    <th>@Localizer["TH1"]</th>
+                                    <th>@Localizer["TH2"]</th>
+                                    <th>@Localizer["TH3"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
                     @if (err == null)
                     {
                         <script>

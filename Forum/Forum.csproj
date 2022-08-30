@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\templates\DeleteArticle.html" />
     <Content Remove="wwwroot\templates\Reply.html" />
     <Content Remove="wwwroot\templates\Topic.html" />
   </ItemGroup>
@@ -23,6 +24,7 @@
 
   <ItemGroup>
     <None Include="wwwroot\templates\Reply.html" />
+    <None Include="wwwroot\templates\DeleteArticle.html" />
     <None Include="wwwroot\templates\Topic.html" />
     <None Include="wwwroot\templates\Article.html" />
   </ItemGroup>

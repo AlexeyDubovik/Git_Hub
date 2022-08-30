@@ -1,14 +1,17 @@
 ﻿using Forum.DAL.Context;
 using Forum.DAO;
 using System.Text.RegularExpressions;
+using System.Runtime.CompilerServices;
+using Forum.DAL.Entities;
+
 namespace Forum.Services
 {
     public class DAO_Worker_Facade
     {
-        public readonly IntroContext introContext;
+        public readonly IntroContext _db;
         private readonly Authenticator authenticator;
-        private readonly RandomServices randomService;
-        private readonly IHasher hasher;
+        private readonly RandomServices random;
+        private readonly IHasher _hasher;
         private UserCheck? userCheck;
         public enum GuidType
         {
@@ -17,26 +20,31 @@ namespace Forum.Services
             Topic,
             Article,
         }
-        public DAO_Worker_Facade(IntroContext introContext, IHasher hasher, RandomServices randomService)
+        public enum Parameters
         {
-            this.hasher = hasher;
-            this.introContext = introContext;
-            this.randomService = randomService;
-            authenticator = new Authenticator(introContext.Users!);
+            Default,
+            Deleted
+        }
+        public DAO_Worker_Facade(IntroContext db, IHasher hasher, RandomServices randomService)
+        {
+            _hasher = hasher;
+            _db = db;
+            random = randomService;
+            authenticator = new Authenticator(db.Users!);
         }
         public bool UserDataCheck(string str)
         {
             if (str == null)
                 return false;
             if (Regex.IsMatch(str, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
-                userCheck = new CheckUserEmail(introContext.Users!);
+                userCheck = new CheckUserEmail(_db.Users!);
             else
-                userCheck = new CheckUserLogin(introContext.Users!);
+                userCheck = new CheckUserLogin(_db.Users!);
             return userCheck.Check(str);
         }
         public Guid? Authenticator(Models.UserModel UserData)
         {
-            return authenticator.Authenticate(UserData, hasher);
+            return authenticator.Authenticate(UserData, _hasher);
         }
         private void DeletePicture(String PictureName, String Path = "./wwwroot/img/")
         {
@@ -48,18 +56,18 @@ namespace Forum.Services
                 return null;
             int pos = Picture.FileName.LastIndexOf('.');
             string IMG_Format = Picture.FileName.Substring(pos);
-            string ImageName = hasher.Hash(Guid.NewGuid().ToString() + hasher.Hash(randomService.Integer.ToString()));
+            string ImageName = _hasher.Hash(Guid.NewGuid().ToString() + _hasher.Hash(random.Integer.ToString()));
             var file = new FileStream(Path + ImageName + IMG_Format, FileMode.Create);
             Picture.CopyToAsync(file).ContinueWith(f => file.Dispose());
             return ImageName + IMG_Format;
         }
         public void CreateUser(Models.UserModel UserData)
         {
-            if (UserData != null && introContext.Users != null)
+            if (UserData != null && _db.Users != null)
             {
                 var user = new DAL.Entities.User();
-                user.PassSalt = hasher.Hash(randomService.Integer.ToString());
-                user.PassHash = hasher.Hash(UserData.Password1 + user.PassSalt);
+                user.PassSalt = _hasher.Hash(random.Integer.ToString());
+                user.PassHash = _hasher.Hash(UserData.Password1 + user.PassSalt);
                 if (UserData.Avatar != null)
                     user.Avatar = SavePicture(UserData.Avatar)!;
                 else
@@ -68,8 +76,8 @@ namespace Forum.Services
                 user.RealName = UserData.RealName!;
                 user.Login = UserData.Login!;
                 user.RegMoment = DateTime.Now;
-                introContext.Users.Add(user);
-                introContext.SaveChanges();
+                _db.Users.Add(user);
+                _db.SaveChanges();
             }
         }
         public String ChangeUserLogin(DAL.Entities.User User, String Login)
@@ -79,8 +87,8 @@ namespace Forum.Services
             else if (!Regex.IsMatch(Login, @"^[^\s()-]*$") && User != null)
             {
                 User.Login = Login;
-                introContext.Update(User);
-                introContext.SaveChanges();
+                _db.Update(User);
+                _db.SaveChanges();
                 return "Success";
             }
             else
@@ -91,8 +99,8 @@ namespace Forum.Services
             if (Regex.IsMatch(NewName, @"^[А-ЯA-Z][а-яa-z]+\s[А-ЯA-Z][а-яa-z]+$") && User != null)
             {
                 User.RealName = NewName;
-                introContext.Update(User);
-                introContext.SaveChanges();
+                _db.Update(User);
+                _db.SaveChanges();
                 return "Success";
             }
             else
@@ -105,8 +113,8 @@ namespace Forum.Services
             else if (Regex.IsMatch(Email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$") && User != null)
             {
                 User.Email = Email;
-                introContext.Update(User);
-                introContext.SaveChanges();
+                _db.Update(User);
+                _db.SaveChanges();
                 return "Success";
             }
             else
@@ -116,14 +124,14 @@ namespace Forum.Services
         {
             if (User == null)
                 return "Error User is null";
-            if (User.PassHash != hasher.Hash(PassForm.OldPassword + User.PassSalt))
+            if (User.PassHash != _hasher.Hash(PassForm.OldPassword + User.PassSalt))
                 return "Invalid Password";
             else if (PassForm.NewPassword2 != null)
             {
-                User.PassSalt = hasher.Hash(randomService.Integer.ToString());
-                User.PassHash = hasher.Hash(PassForm.NewPassword2 + User.PassSalt);
-                introContext.Update(User);
-                introContext.SaveChanges();
+                User.PassSalt = _hasher.Hash(random.Integer.ToString());
+                User.PassHash = _hasher.Hash(PassForm.NewPassword2 + User.PassSalt);
+                _db.Update(User);
+                _db.SaveChanges();
                 return "Success";
             }
             else
@@ -140,8 +148,8 @@ namespace Forum.Services
                 {
                     DeletePicture(User.Avatar);
                     User.Avatar = SavePicture(Avatar)!;
-                    introContext.Update(User);
-                    introContext.SaveChanges();
+                    _db.Update(User);
+                    _db.SaveChanges();
                     return "Success";
                 }
                 catch
@@ -149,106 +157,83 @@ namespace Forum.Services
                     return "Error";
                 }
         }
+        
         public dynamic? GetTopics(GuidType GType, Guid? guid = null)
         {
             if (guid == null && GType != GuidType.All) {
                 return null;
             }
-            return introContext.Topics!
+            return _db.Topics!
                 .Where(t =>
-                GType == GuidType.Topic ? t.Id       == guid :
-                GType == GuidType.User  ? t.AuthorId == guid :
-                                          t.Id       == t.Id)
-                .Select(t => new {
-                    Id           = t.Id,
-                    Title        = t.Title,
+                GType == GuidType.Topic ? t.Id == guid :
+                GType == GuidType.User ? t.AuthorId == guid :
+                                          t.Id == t.Id)
+                .Select(t => new
+                {
+                    Id = t.Id,
+                    Title = t.Title,
                     Descrtiption = t.Descrtiption,
-                    Culture      = t.Culture,
-                    Author       = t.Author == null ? null : new
+                    Culture = t.Culture,
+                    Author = t.Author == null ? null : new
                     {
-                        ID       = t.Author!.ID,
-                        Login    = t.Author.Login,
+                        ID = t.Author!.ID,
+                        Login = t.Author.Login,
                         RealName = t.Author.RealName,
-                        Email    = t.Author.Email,
-                        Avatar   = t.Author.Avatar
+                        Email = t.Author.Email,
+                        Avatar = t.Author.Avatar
                     },
                     ArticlesInfo = t.articles!.Count(a => a.StatusJournal!
                                               .OrderBy(S => S.OperationDate)
                                               .LastOrDefault()!.IsDeleted != true) == 0 ?
                     new
                     {
-                        Count       = t.articles!.Count(a => a.StatusJournal!
-                                                 .OrderBy(S => S.OperationDate)
-                                                 .LastOrDefault()!.IsDeleted != true),
+                        Count = t.articles!.Count(a => a.StatusJournal!
+                                           .OrderBy(S => S.OperationDate)
+                                           .LastOrDefault()!.IsDeleted != true),
                         CreatedDate = DateTime.Parse("11.11.1111"),
-                        RealName    = "Empty",
-                        Login       = "Empty",
-                        Email       = "Empty",
+                        RealName = "Empty",
+                        Login = "Empty",
+                        Email = "Empty",
                     }
                     :
                     new
                     {
-                        Count       = t.articles!.Count(a => a.StatusJournal!
-                                                 .OrderBy(S => S.OperationDate)
-                                                 .LastOrDefault()!.IsDeleted != true),
+                        Count = t.articles!.Count(a => a.StatusJournal!
+                                           .OrderBy(S => S.OperationDate)
+                                           .LastOrDefault()!.IsDeleted != true),
                         CreatedDate = t.articles!.OrderBy(a => a.CreatedDate).LastOrDefault()!.CreatedDate,
-                        RealName    = t.articles!.OrderBy(a => a.CreatedDate).LastOrDefault()!.Author!.RealName,
-                        Login       = t.articles!.OrderBy(a => a.CreatedDate).LastOrDefault()!.Author!.Login,
-                        Email       = t.articles!.OrderBy(a => a.CreatedDate).LastOrDefault()!.Author!.Email,
+                        RealName = t.articles!.OrderBy(a => a.CreatedDate).LastOrDefault()!.Author!.RealName,
+                        Login = t.articles!.OrderBy(a => a.CreatedDate).LastOrDefault()!.Author!.Login,
+                        Email = t.articles!.OrderBy(a => a.CreatedDate).LastOrDefault()!.Author!.Email,
                     }
-                }).ToList().OrderByDescending(topic => topic.ArticlesInfo.CreatedDate);
+                })
+                .ToList()
+                .OrderByDescending(topic => topic.ArticlesInfo.CreatedDate);
         }
-        public IQueryable? GetArticles(GuidType GType, Guid? guid = null)
+        public IQueryable? GetArticles(GuidType GType, Guid? guid = null, Parameters param = Parameters.Default)
         {
             if (guid == null && GType != GuidType.All) {
                 return null;
             }
-            return introContext.Articles!
+            return _db.Articles!
                 .Where(a =>
-                GType == GuidType.Topic   ? a.TopicId == guid :
-                GType == GuidType.User    ? a.AuthorId == guid :
+                GType == GuidType.Topic ? a.TopicId == guid :
+                GType == GuidType.User ? a.AuthorId == guid :
                 GType == GuidType.Article ? a.Id == guid :
                                             a.Id == a.Id)
                 .Select(A => new
                 {
                     Id = A.Id,
                     Text = A.Text,
-                    Status = A.StatusJournal == null ? null :
-                                  A.StatusJournal!
-                                  .OrderByDescending(S => S.OperationDate)
-                                  .FirstOrDefault()!,
                     CreatedDate = A.CreatedDate,
-                    ReplyId = A.ReplyId, 
-                    Replys = A.Replys == null ? null : 
-                    A.Replys!
-                        .Select(R => new
-                        {
-                            Id = R.Id,
-                            Text = R.Text,
-                            Author = new
-                            {
-                                ID = R.Author!.ID,
-                                Login = R.Author.Login,
-                                RealName = R.Author.RealName,
-                                Avatar = R.Author.Avatar,
-                                Email = R.Author.Email
-                            },
-                            Status = R.StatusJournal == null ? null : 
-                            R.StatusJournal!
-                            .OrderByDescending(S => S.OperationDate)
-                            .FirstOrDefault()!,
-                            CreatedDate = R.CreatedDate,
-                            ReplyId = R.ReplyId,
-                            Replys = R.Replys
-                        })
-                        .Where(R => R.Status == null || R.Status.IsDeleted == false),
+                    ReplyId = A.ReplyId,
                     Topic = new
                     {
                         Id = A.Topic!.Id,
                         Title = A.Topic.Title,
                         Descrtiption = A.Topic.Descrtiption,
                         Culture = A.Topic.Culture,
-                        Author = new
+                        Author = A.Topic.Author == null ? null : new
                         {
                             ID = A.Topic.Author!.ID,
                             Login = A.Topic.Author.Login,
@@ -257,17 +242,23 @@ namespace Forum.Services
                             Email = A.Topic.Author.Email
                         }
                     },
-                    Author = new
+                    Author = A.Author == null ? null : new
                     {
                         ID = A.Author!.ID,
                         Login = A.Author.Login,
                         RealName = A.Author.RealName,
                         Avatar = A.Author.Avatar,
                         Email = A.Author.Email
-                    }
+                    },
+                    Status = A.StatusJournal == null ? null
+                        : A.StatusJournal!
+                            .OrderByDescending(S => S.OperationDate)
+                            .FirstOrDefault()!,
+                    Replys = A.Replys! == null ? null : A.Replys!.GetReplys()
                 })
-                .Where(A => (A.Status == null || A.Status.IsDeleted == false) && A.ReplyId == null);
-
+                .Where(param == Parameters.Deleted
+                       ? (A => (A.Status!.IsDeleted == true))
+                       : (A => (A.Status == null || A.Status.IsDeleted == false) && A.ReplyId == null));
         }
     }
 }

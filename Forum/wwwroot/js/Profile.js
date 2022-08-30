@@ -1,14 +1,42 @@
 ﻿import { ShowInfo, SAvatarUpload, SAvatarChange, validFileType } from '/js/Function.js';
+import { GetHTML, GetArticles } from '/js/FetchRequest.js';
 document.addEventListener('DOMContentLoaded', () => {
     const [html] = document.getElementsByTagName("html")
     const Locale = html.getAttribute("lang");
-    const ProfileConteiner = document.getElementById('ProfileConteiner');
+    const ProfileConteiner = document.querySelector('.ProfileConteiner');
+    const UserId = ProfileConteiner.getAttribute("id");
+    const DATableBTN = document.querySelector('.DelTableBTN');
+    const Param = "?ParamSearch=Deleted&GuidType=User";
+    const tbody = document.querySelector(".DeleteArticleTable tbody");
+    console.log(tbody);
+    getAll(UserId, Param, '/templates/DeleteArticle.html',).then(([Articles, temlateDA]) => {
+        for (let Article of Articles) {
+            let _Date = '';
+            let now = new Date();
+            let ArticleDate = new Date(Article.status.operationDate);
+            if (now.toLocaleDateString('en-US') === ArticleDate.toLocaleDateString('en-US')) {
+                _Date =`${ArticleDate.getHours()}:${ArticleDate.getMinutes()}`;
+            }
+            else {
+                _Date = ArticleDate.toLocaleString(Locale);
+            }
+            let html = temlateDA
+                .replaceAll("{{ArticleDeletedId}}", Article.id)
+                .replaceAll("{{ArticleDeleteDate}}", _Date)
+                .replaceAll("{{TopicTitle}}", Article.topic.title)
+                .replaceAll("{{TopicDescrtiption}}", Article.topic.descrtiption)
+                .replaceAll("{{ArticleText}}", Article.text);
+            tbody.innerHTML += html;
+        }
+        console.log(Articles, temlateDA);
+        DATableBTN.onclick = HiddeTable;
+    })
     //
     //info hidde
     //
     const Info = document.getElementsByClassName('info')[0];
     if (Info != null) {
-        Info.style.marginTop = (Info.offsetHeight / 2) * -1 + 'px';
+        Info.style.marginTop  = (Info.offsetHeight / 2) * -1 + 'px';
         Info.style.marginLeft = (Info.offsetWidth / 2) * -1 + 'px';
         setTimeout(e => {
             Info.style.display = "none";
@@ -35,9 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const UploadAvaTxt = document.querySelector("Name1").innerText;
     const CnahgeAvaTxt = document.querySelector("Name2").innerText;
     const ButtonAvaTxt = document.querySelector("Text");
-    const pic = document.getElementById('AvatarIMG');
-    const ava = document.getElementById('avatar_Select_Button');
-    const Error = document.getElementById('avaError');
+    const pic          = document.getElementById('AvatarIMG');
+    const ava          = document.getElementById('avatar_Select_Button');
+    const Error        = document.getElementById('avaError');
     const ButtonAvatar = document.getElementById('ButtonAvatar');
     ButtonAvaTxt.innerText = UploadAvaTxt;
     ava.addEventListener('change', updateImageDisplay);
@@ -128,3 +156,16 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 });
+function HiddeTable(e) {
+    const DATable = document.querySelector(".DeleteArticleTable");
+    if (DATable.style.display === "none")
+        DATable.style.display = "block";
+    else
+        DATable.style.display = "none";
+}
+function getAll(UserID, Param, Path_DA) {
+    return Promise.all([
+        GetArticles(UserID, Param),
+        GetHTML(Path_DA),
+    ]);
+}

@@ -2,16 +2,26 @@
     const response = await fetch(Path);
     return await response.text();
 }
-async function GetArticles(TopicId) {
-    const response = await fetch(`/api/Article/${TopicId}`);
+async function GetArticles(Id, Param = "") {
+    console.log(Param);
+        const response = await fetch(`/api/Article/${Id}` + Param);
     return await response.json();
 }
-async function GetUser(UserId) {
-    const response = await fetch(`/api/User/${UserId}`);
+async function DeleteArticle(ArticleId, UserID) {
+    const response = await fetch(`/api/Article/${ArticleId}`, {
+        method: 'DELETE',
+        headers: {
+            'UserID': `${UserID}`
+        }
+    });
+    return await response.json();
+};
+async function GetUser(Id) {
+    const response = await fetch(`/api/User/${Id}`);
     return await response.json();
 }
-async function GetTopics(tbody) {
+async function GetTopics() {
     const response = await fetch("/api/Topic");
     return await response.json();
 };
-export { GetHTML, GetArticles, GetUser, GetTopics };
+export { GetHTML, GetArticles, GetUser, GetTopics, DeleteArticle};
