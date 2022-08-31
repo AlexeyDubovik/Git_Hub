@@ -156,8 +156,11 @@
   <data name="Placeholder_NewPass" xml:space="preserve">
     <value>New Password</value>
   </data>
+  <data name="TH0" xml:space="preserve">
+    <value>Renew</value>
+  </data>
   <data name="TH1" xml:space="preserve">
-    <value>Date</value>
+    <value>Deletion date</value>
   </data>
   <data name="TH2" xml:space="preserve">
     <value>Topic</value>

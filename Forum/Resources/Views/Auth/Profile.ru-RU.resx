@@ -156,8 +156,11 @@
   <data name="Placeholder_NewPass" xml:space="preserve">
     <value>Новый пароль</value>
   </data>
+  <data name="TH0" xml:space="preserve">
+    <value>Возобновить</value>
+  </data>
   <data name="TH1" xml:space="preserve">
-    <value>Дата</value>
+    <value>Дата удаления</value>
   </data>
   <data name="TH2" xml:space="preserve">
     <value>Топик</value>

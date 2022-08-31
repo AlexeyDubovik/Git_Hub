@@ -14,16 +14,22 @@ namespace Forum.API
         private readonly IntroContext _db;
         private readonly HttpRequestGuidCheck _GuidCheck;
         private readonly DAO_Worker_Facade _DAO;
-        public ArticleController(IntroContext db, HttpRequestGuidCheck GuidCheck, DAO_Worker_Facade DAO)
+        private readonly IAuthService _auth;
+        public ArticleController(IntroContext db, HttpRequestGuidCheck GuidCheck, DAO_Worker_Facade DAO, IAuthService auth)
         {
             _db = db;
             _GuidCheck = GuidCheck;
             _DAO = DAO;
+            _auth = auth;
         }
         [HttpGet("{ID}")]
-        public object Get(String ID, [FromQuery] String ParamSearch, [FromQuery] String GuidType)
+        public object Get(String ID)
         {
             Guid guid = _GuidCheck.Check(HttpContext, ID);
+            DAO_Worker_Facade.GuidType GT = DAO_Worker_Facade.GuidType.All;
+            DAO_Worker_Facade.Parameters DP = DAO_Worker_Facade.Parameters.Default;
+            String ParamSearch = HttpContext.Request.Query["ParamSearch"];
+            String GuidType = HttpContext.Request.Query["GuidType"];
             if (guid == Guid.Empty)
                 return "Conflict: invalid id format (GUID required)";
             if (GuidType == "User")
@@ -33,27 +39,35 @@ namespace Forum.API
                     HttpContext.Response.StatusCode = 404;
                     return "Not Found: User absent";
                 }
+                GT = DAO_Worker_Facade.GuidType.User;
             }
-            else
+            if (GuidType == "Article")
+            {
+                if (_db.Articles!.Find(guid) == null)
+                {
+                    HttpContext.Response.StatusCode = 404;
+                    return "Not Found: Article absent";
+                }
+                GT = DAO_Worker_Facade.GuidType.Article;
+            }
+            else if (GuidType == null || GuidType == "Topic")
             {
                 if (_db.Topics!.Find(guid) == null)
                 {
                     HttpContext.Response.StatusCode = 404;
                     return "Not Found: topic absent";
                 }
+                GT = DAO_Worker_Facade.GuidType.Topic;
             }
-            var Articles = _DAO.GetArticles(
-                GuidType == "User" 
-                ? DAO_Worker_Facade.GuidType.User
-                : DAO_Worker_Facade.GuidType.Topic, 
-                guid,
-                ParamSearch == "Deleted" 
-                ? DAO_Worker_Facade.Parameters.Deleted
-                : DAO_Worker_Facade.Parameters.Default);
+            if (ParamSearch == "Deleted")
+            {
+                DP = DAO_Worker_Facade.Parameters.Deleted;
+            }
+            var Articles = _DAO.GetArticles(GT, guid, DP);
             if (Articles == null)
             {
                 HttpContext.Response.StatusCode = 404;
-                return "Not Found: Topic empty";
+                return "Not Found: Articles empty";
             }
             return Articles;
         }
@@ -139,6 +153,37 @@ namespace Forum.API
             _db.SaveChanges();
             return JsonSerializer.Serialize(Status);
         }
-
+        public object Default([FromQuery]string id)
+        {
+            switch (HttpContext.Request.Method)
+            {
+                case "RESTORE":
+                    return Restore(id);
+                default:
+                    break;
+            }
+            return new { method = HttpContext.Request.Method, ID = id };
+        }
+        private object Restore(string id)
+        {
+            Guid ArticleID = _GuidCheck.Check(HttpContext, HttpContext.Request.Query["ArticleID"]);
+            Guid UserID = _GuidCheck.Check(HttpContext, id);
+            if (ArticleID == Guid.Empty || UserID == Guid.Empty)
+                return "Conflict: invalid id format (GUID required)";
+            if(_auth.User!.ID != UserID)
+            {
+                HttpContext.Response.StatusCode = 403;
+                return "Forbidden : You have no rights";
+            }
+            var SJ = _db.SatatusJournal!.Where(R=>R.ArticleID == ArticleID).FirstOrDefault();
+            if (SJ != null)
+            {
+                SJ.IsDeleted = false;
+                SJ.OperationDate = DateTime.Now;
+                SJ.UserID = UserID;
+                _db.SaveChanges();
+            }
+            return JsonSerializer.Serialize(SJ);
+        }
     }
 }

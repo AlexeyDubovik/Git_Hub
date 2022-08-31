@@ -1,14 +1,14 @@
 ﻿using Forum.DAL.Context;
 using Forum.DAO;
 using System.Text.RegularExpressions;
-using System.Runtime.CompilerServices;
 using Forum.DAL.Entities;
-
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 namespace Forum.Services
 {
     public class DAO_Worker_Facade
     {
-        public readonly IntroContext _db;
+        public  readonly IntroContext _db;
         private readonly Authenticator authenticator;
         private readonly RandomServices random;
         private readonly IHasher _hasher;
@@ -217,48 +217,63 @@ namespace Forum.Services
             }
             return _db.Articles!
                 .Where(a =>
-                GType == GuidType.Topic ? a.TopicId == guid :
-                GType == GuidType.User ? a.AuthorId == guid :
-                GType == GuidType.Article ? a.Id == guid :
-                                            a.Id == a.Id)
+                    GType == GuidType.Topic   ? a.TopicId  == guid :
+                    GType == GuidType.User    ? a.AuthorId == guid :
+                    GType == GuidType.Article ? a.Id       == guid :
+                                                a.Id       == a.Id)
                 .Select(A => new
                 {
-                    Id = A.Id,
-                    Text = A.Text,
+                    Id          = A.Id,
+                    Text        = A.Text,
                     CreatedDate = A.CreatedDate,
-                    ReplyId = A.ReplyId,
-                    Topic = new
+                    ReplyId     = A.ReplyId,
+                    Topic       = new
                     {
-                        Id = A.Topic!.Id,
-                        Title = A.Topic.Title,
+                        Id           = A.Topic!.Id,
+                        Title        = A.Topic.Title,
                         Descrtiption = A.Topic.Descrtiption,
-                        Culture = A.Topic.Culture,
-                        Author = A.Topic.Author == null ? null : new
+                        Culture      = A.Topic.Culture,
+                        Author       = A.Topic.Author == null ? null : new
                         {
-                            ID = A.Topic.Author!.ID,
-                            Login = A.Topic.Author.Login,
+                            ID       = A.Topic.Author!.ID,
+                            Login    = A.Topic.Author.Login,
                             RealName = A.Topic.Author.RealName,
-                            Avatar = A.Topic.Author.Avatar,
-                            Email = A.Topic.Author.Email
+                            Avatar   = A.Topic.Author.Avatar,
+                            Email    = A.Topic.Author.Email
                         }
                     },
                     Author = A.Author == null ? null : new
                     {
-                        ID = A.Author!.ID,
-                        Login = A.Author.Login,
+                        ID       = A.Author!.ID,
+                        Login    = A.Author.Login,
                         RealName = A.Author.RealName,
-                        Avatar = A.Author.Avatar,
-                        Email = A.Author.Email
+                        Avatar   = A.Author.Avatar,
+                        Email    = A.Author.Email
                     },
                     Status = A.StatusJournal == null ? null
-                        : A.StatusJournal!
+                            : A.StatusJournal!
                             .OrderByDescending(S => S.OperationDate)
                             .FirstOrDefault()!,
-                    Replys = A.Replys! == null ? null : A.Replys!.GetReplys()
+                    Replys = A.Replys! == null 
+                             ? null : 
+                             A.Replys!.Where(R => R.StatusJournal == null ||
+                                                  R.StatusJournal!
+                                                  .OrderByDescending(S => S.OperationDate)
+                                                  .FirstOrDefault() == null ||
+                                                  R.StatusJournal!
+                                                  .OrderByDescending(S => S.OperationDate)
+                                                  .FirstOrDefault()!.IsDeleted != true)
+                                      .OrderBy(R => R.CreatedDate)
+                                      .Select(R => new
+                                      {
+                                          Id = R.Id,
+                                          CreatedDate = R.CreatedDate
+                                      })
+                                      
                 })
                 .Where(param == Parameters.Deleted
                        ? (A => (A.Status!.IsDeleted == true))
-                       : (A => (A.Status == null || A.Status.IsDeleted == false) && A.ReplyId == null));
+                       : (A => (A.Status == null || A.Status.IsDeleted == false) /*&& A.ReplyId == null*/));
         }
     }
 }

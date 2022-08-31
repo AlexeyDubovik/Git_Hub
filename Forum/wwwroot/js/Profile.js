@@ -1,5 +1,5 @@
 ﻿import { ShowInfo, SAvatarUpload, SAvatarChange, validFileType } from '/js/Function.js';
-import { GetHTML, GetArticles } from '/js/FetchRequest.js';
+import { GetHTML, GetArticles, RestoreArticle } from '/js/FetchRequest.js';
 document.addEventListener('DOMContentLoaded', () => {
     const [html] = document.getElementsByTagName("html")
     const Locale = html.getAttribute("lang");
@@ -28,8 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 .replaceAll("{{ArticleText}}", Article.text);
             tbody.innerHTML += html;
         }
-        console.log(Articles, temlateDA);
-        DATableBTN.onclick = HiddeTable;
+        const RestBTNs = document.querySelectorAll(".resBTN");
+        for (let restbtn of RestBTNs) {
+            restbtn.onclick = RestoreArticleClick(UserId);
+        }
+        DATableBTN.onclick = HiddeTableClick;
     })
     //
     //info hidde
@@ -156,7 +159,19 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 });
-function HiddeTable(e) {
+
+function RestoreArticleClick(UserId) {
+    return (e) => {
+        let tr = e.target.closest("tr")
+        const ArticleID = `${tr.getAttribute("id")}`;
+        RestoreArticle(UserId, ArticleID).then(r => {
+            console.log(r);
+            tr.remove();
+        })
+    }
+}
+
+function HiddeTableClick(e) {
     const DATable = document.querySelector(".DeleteArticleTable");
     if (DATable.style.display === "none")
         DATable.style.display = "block";

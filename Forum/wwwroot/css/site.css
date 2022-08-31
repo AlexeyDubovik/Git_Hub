@@ -75,7 +75,7 @@ body {
 }
 
 footer{
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 .container {
@@ -727,17 +727,30 @@ ul.inlined, ul.inlined > li {
 .DeleteArticleTable td{
     border:1px solid white;
 }
-.Article_Data{
-    width:10%;
+
+.Article_Rest{
+    width: 5%;
+}
+.Article_Data {
+    width: 10%;
 }
 .Article_Topic {
     width: 30%;
 }
 .Article_Text {
     text-align:justify;
-    width: 70%;
+    width: 55%;
 }
 .DeleteArticleTable tr th{
+    padding:5px;
     border:1px solid white;
+}
+.resBTN img {
+    cursor: pointer;
+    width: 20px;
+    filter: invert(42%) sepia(13%) saturate(752%) hue-rotate(87deg) brightness(119%) contrast(119%);
+}
+.resBTN img:hover {
+    filter: invert(42%) sepia(13%) saturate(752%) hue-rotate(200deg) brightness(119%) contrast(119%);
 }
 
